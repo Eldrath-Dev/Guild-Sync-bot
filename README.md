@@ -1,286 +1,311 @@
-# 🔨 Wayhaven Enforcer Bot v2.0
+# Wayhaven Enforcer Bot
 
-A sophisticated Discord bot designed for **enterprise-grade cross-server moderation** and **punishment synchronization** across multiple linked Discord servers. Built with `discord.py` and SQLite for reliable, scalable moderation management that can handle complex server networks.
+<p align="center">
+  <img src="https://img.shields.io/badge/version-2.0-blue.svg" alt="Version">
+  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/discord.py-2.3.0+-blue.svg" alt="Discord.py">
+  <img src="https://img.shields.io/badge/status-stable-green.svg" alt="Status">
+  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
+</p>
 
-## 📋 Table of Contents
-
-- [🚀 Features](#-features)
-- [🏗️ Architecture Overview](#️-architecture-overview)
-- [🛠 Installation & Setup](#-installation--setup)
-- [🧙 Step-by-Step Setup Wizards](#-step-by-step-setup-wizards)
-- [⚙️ Configuration](#️-configuration)
-- [📚 Complete Command Reference](#-complete-command-reference)
-- [🔄 How Everything Works](#-how-everything-works)
-- [🔧 Advanced Features](#-advanced-features)
-- [📊 Monitoring & Performance](#-monitoring--performance)
-- [🔄 Migration Guide v1→v2](#-migration-guide-v1→v2)
-- [🆘 Troubleshooting & Support](#-troubleshooting--support)
-- [🛡️ Backup & Disaster Recovery](#️-backup--disaster-recovery)
-- [🔌 API Reference (MCP Integration)](#-api-reference-mcp-integration)
+<p align="center">
+  <strong>Enterprise-grade Discord moderation bot with cross-server punishment synchronization</strong>
+</p>
 
 ---
 
-## 🍼 First Time Admin Guide
+## Table of Contents
 
-### 👋 Welcome! Let's Set Up Your Bot Together! 🎉
-
-**Hi there!** If you've never set up a Discord bot before, don't worry! This guide will walk you through everything step-by-step, like we're setting up a new game together. We'll go slow and I'll explain everything as we go.
-
----
-
-### 🤔 What Does This Bot Do?
-
-Imagine you have a big playground (that's your Discord server). Sometimes kids don't follow the rules, right? This bot is like a friendly crossing guard that:
-
-🎯 **Keeps everyone safe** - Stops rule-breakers across ALL your servers
-🤝 **Works as a team** - If someone gets in trouble on Server A, they're in trouble on Server B too
-📝 **Takes notes** - Remembers everything so you can check who's been naughty
-⏰ **Gives time-outs** - Makes loud kids be quiet for a while
-✅ **Says sorry later** - Lets good kids come back when they're ready
-
-**In short:** One punishment works everywhere! No more rule-breakers jumping between your servers. 😊
+- [About](#-about)
+- [Features](#-features)
+- [Getting Started](#-getting-started)
+- [Installation](#-installation)
+- [Configuration](#-configuration)
+- [Commands](#-commands)
+- [Architecture](#-architecture)
+- [Setup Wizards](#-setup-wizards)
+- [Advanced Features](#-advanced-features)
+- [Monitoring](#-monitoring)
+- [Migration Guide](#-migration-guide)
+- [Troubleshooting](#-troubleshooting)
+- [API Reference](#-api-reference)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
-### 🚀 Step 1: Get Your Bot Token (The Secret Key) 🔑
+## About
 
-Every bot needs a special "key" to join Discord. It's like getting a library card!
+Wayhaven Enforcer is a powerful Discord bot designed for managing moderation across multiple servers. It provides seamless punishment synchronization, ensuring consistent enforcement regardless of which server a user joins. The bot is built with scalability and reliability in mind, making it suitable for both small communities and large server networks.
 
-1. **Go to [Discord Developer Portal](https://discord.com/developers/applications)**
-   - Log in with your Discord account
-   - Click the blue "New Application" button
+## Key Benefits
 
-2. **Name Your Bot**
-   - Call it "Wayhaven Enforcer" or whatever you like
-   - Click "Create"
-
-3. **Get the Bot Ready**
-   - Click "Bot" on the left menu
-   - Click "Add Bot"
-   - Copy the "Token" - **this is super secret, like your password!**
+- **Consistent Moderation**: Punishments applied on one server automatically sync to linked servers
+- **Comprehensive Audit Trail**: Full logging and reporting of all moderation actions
+- **Automatic Reconciliation**: Detects and resolves inconsistencies across server networks
+- **Flexible Configuration**: Adapts to various server architectures and moderation needs
+- **Enterprise Features**: System health monitoring, backup procedures, and disaster recovery
 
 ---
 
-### 📥 Step 2: Download & Prepare (Like Unboxing a New Toy) 🎁
+## Features
 
-1. **Get the Bot Files**
-   - Click the green "Code" button on GitHub
-   - Download ZIP and unzip it somewhere safe
+### Core Functionality
 
-2. **Install Python** (if you don't have it)
-   - Go to [python.org](https://python.org)
-   - Download and install Python 3.8 or higher
+- Cross-server punishment synchronization
+- Automatic event detection and propagation
+- Time-based punishments (timeouts, temporary mutes)
+- Audit logging and reporting
+- System health monitoring
+- Automatic reconciliation
 
-3. **Set Up the Secret Place**
+### Moderation Actions
+
+- `/ban` - Ban users across linked servers
+- `/unban` - Remove bans across linked servers
+- `/kick` - Kick users from multiple servers
+- `/mute` - Apply timed or permanent mutes
+- `/timeout` - Discord timeout with synchronization
+- `/warn` - Issue warnings with tracking
+
+### Administrative Features
+
+- Dynamic server relationship management
+- Multiple relationship types (sync, monitor, backup)
+- Webhook notifications
+- CSV audit export
+- Command-line interface
+- Database maintenance tools
+
+---
+
+## Getting Started
+
+If you've never set up a Discord bot before, this section will guide you through the complete setup process. We'll cover everything from creating your bot account to performing your first moderation action.
+
+### What the Bot Does
+
+Wayhaven Enforcer automatically synchronizes moderation actions across multiple Discord servers. When you ban someone on one server, they're banned on all connected servers simultaneously. The bot handles:
+
+- **Cross-server punishments**: Bans, mutes, kicks, timeouts, and warnings
+- **Automatic synchronization**: No manual action needed on linked servers
+- **Audit trail**: Complete logging of all moderation actions
+- **Time-based punishments**: Automatic expiration for temporary penalties
+- **Reconciliation**: Detects and fixes inconsistencies between servers
+
+In short, one moderator action applies everywhere in your server network.
+
+---
+
+### Step 1: Get Your Bot Token
+
+Every bot needs a token to join Discord. Create your bot at the [Discord Developer Portal](https://discord.com/developers/applications):
+
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Click "New Application"
+3. Name your application (e.g., "Wayhaven Enforcer")
+4. Go to the "Bot" section and click "Add Bot"
+5. Copy the token - keep this secret!
+
+### Step 2: Download and Install
+
+1. Download the bot files from GitHub
+2. Extract them to a folder on your computer
+3. Install Python 3.8+ if you don't have it
+4. Open a terminal/command prompt in the bot folder
+
+### Step 3: Setup the Bot
+
+1. Install dependencies:
    ```bash
-   # Open a black window (called "Command Prompt" or "Terminal")
-   # Go to where you unzipped the bot:
-   cd "Wayhaven Punishment sync bot"
-
-   # Get ready:
    pip install -r requirements.txt
+   ```
+
+2. Create the database:
+   ```bash
    python setup_database.py
    ```
 
----
+3. Create a `.env` file in the bot folder:
+   ```env
+   BOT_TOKEN=your_bot_token_here
+   APPLICATION_ID=your_application_id_beginning_number
+   CLIENT_ID=your_client_id_number
+   MAIN_GUILD_ID=your_main_server_id
+   TEST_GUILD_ID=your_test_server_id
+   DEBUG=false
+   ```
 
-### ⚙️ Step 3: Tell the Bot Your Secrets (Configuration) 🤫
+   To find your server IDs: Right-click your server icon → "Copy ID" (Developer Mode must be enabled).
 
-Create a file called `.env` in your bot folder. Put these words in it:
+### Step 4: Invite Bot to Discord
 
-```env
-BOT_TOKEN=your_secret_token_here
-APPLICATION_ID=your_application_number
-CLIENT_ID=your_client_id_number
-MAIN_GUILD_ID=your_main_server_number
-TEST_GUILD_ID=your_test_server_number
-DEBUG=false
-```
-
-**Where do I find these numbers?**
-- `BOT_TOKEN`: The secret key from Step 1
-- `APPLICATION_ID`: Big number shown in your Discord Developer Portal
-- `CLIENT_ID`: Also from Developer Portal
-- `MAIN_GUILD_ID`: Right-click your main server → "Copy ID"
-- `TEST_GUILD_ID`: Same for your test server
-
----
-
-### 👋 Step 4: Invite Your Bot to Party (Discord) 🎊
-
-1. **Make the Invite Link**
+1. Generate the invite URL:
    ```
    https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=268561488&scope=bot%20applications.commands
    ```
 
-2. **Click the Link**
-   - Pick your server from the dropdown
-   - Check all the boxes that say "YES"
-   - Click "Authorize"
+2. Click the URL and invite the bot to your server
 
-3. **Start the Bot!**
+3. Start the bot:
    ```bash
    python bot.py
    ```
-   - You should see: "Bot started successfully!"
+
+   You should see confirmation messages that the bot connected successfully.
 
 ---
 
-### 🛠️ Step 5: Set Up Like Arranging Your Room (Basic Configuration) 🏠
+### Step 5: Configure Basic Settings
 
-Now your bot is in your server! Let's teach it the rules:
+Configure the bot's basic moderation settings:
 
-#### First, Tell It Where the "Quiet Corner" Is
-```
-/config muterole role:@Muted
-```
-*(Create a @Muted role first if you don't have one)*
+1. **Set Mute Role**
+   ```
+   /config muterole role:@Muted
+   ```
+   (Create the @Muted role first if it doesn't exist)
 
-#### Set Up Notification Channel
-```
-/config notifications channel:#mod-logs enabled:true
-```
-*(So you know when the bot does something)*
+2. **Configure Log Channel**
+   ```
+   /config notifications channel:#mod-logs enabled:true
+   ```
+   (This channel will show moderation notifications)
 
-#### Test That Everything Works
-```
-/warn user:@someone reason:Testing the bot
-```
-*(You should see a warning message!)*
-
----
-
-### 🎮 Step 6: Using Your Bot (Like Playing a Game) 🎲
-
-#### Basic Commands (Easy Peasy)
-
-**Stop Someone Being Mean:**
-```
-/warn user:@badguy reason:Being not nice
-```
-
-**Make Someone Take a Break:**
-```
-/mute user:@loudperson duration:1h reason:Too loud
-```
-
-**Remove Someone Completely:**
-```
-/ban user:@troublemaker reason:Breaking all rules
-```
-
-**Say Sorry and Let Them Back:**
-```
-/unban user:123456789 reason:Good behavior
-```
-
-**(The numbers are the person's Discord ID - right-click their name to copy)**
+3. **Test Basic Functionality**
+   ```
+   /warn user:@testuser reason:Testing the bot
+   ```
+   (You should see a warning message appear)
 
 ---
 
-### 🌉 Step 7: Connect Multiple Servers (Advanced Magic) ✨
+### Step 6: Learn Basic Commands
 
-Want the same punishment to work on ALL your servers? Let's connect them!
+The bot supports several key moderation commands:
 
-1. **Pick Your Main Server**
+**Issue a Warning**
+```
+/warn user:@username reason:Breaking server rules
+```
+
+**Apply a Timed Mute**
+```
+/mute user:@username duration:1h reason:Disruptive behavior
+```
+
+**Ban a User Across Servers**
+```
+/ban user:@username reason:Violation of community guidelines
+```
+
+**Unban a User**
+```
+/unban user:123456789 reason:Appeal accepted
+```
+
+*Note: Use Discord's "Copy ID" feature to get user IDs (enable Developer Mode first)*
+
+---
+
+### Step 7: Connect Multiple Servers (Optional)
+
+For network-wide moderation, connect your servers:
+
+1. **Set Main Server**
    ```
    /setup main-guild
    ```
 
-2. **Add Other Servers**
+2. **Add Child Servers**
    ```
    /setup add-child guild-id:123456789012345678
    ```
-   *(Get the guild ID by right-clicking the server name)*
+   (Get server ID by right-clicking server icon → Copy ID)
 
-3. **Check Everything Works**
+3. **Verify Setup**
    ```
    /setup dashboard
    ```
 
-**Now:** If you ban someone on Server A, they're banned on Server B automatically! 🎉
+Once connected, punishments applied on one server automatically sync to linked servers.
 
 ---
 
-### 🆘 Help! Something Isn't Working! 😰
+### Troubleshooting Common Issues
 
-#### "The bot isn't responding to commands"
-1. Check if the bot is online (green circle)
-2. Make sure you invited it with admin permissions
-3. Try typing `/` and see if commands show up
+**Bot not responding to commands:**
+- Check if bot is online with a green status
+- Verify admin permissions were granted
+- Try typing `/` to see if commands appear
+- Check `bot.log` for error messages
 
-#### "I can't use admin commands"
-- You need "Administrator" permissions in the server
-- Or ask the server owner to give you the right roles
+**Permission denied for admin commands:**
+- You need Administrator role or equivalent permissions
+- Contact server owner for proper role assignment
 
-#### "Mute role isn't working"
-- Make sure the bot's role is ABOVE the @Muted role
-- Check that @Muted role permissions are set correctly
+**Mute functionality not working:**
+- Bot role must be higher than @Muted role
+- Check @Muted role permissions
+- Test with `/warn` first to ensure basic functionality
 
-#### "Nothing happens when I type commands"
-1. Is the bot online?
-2. Did you invite it with slash command permissions?
-3. Try running `/setup dashboard` first
-
-#### Still stuck? Ask for help!
-- Check the fancy technical sections later in this guide
-- Look at the bot's log file (`bot.log`) for error messages
-- Ask in our Discord server (link at bottom)
+**Commands not executing:**
+- Confirm bot has "Use Slash Commands" permission
+- Try `/setup dashboard` for diagnostics
+- Restart bot if needed
 
 ---
 
-### 🎉 Success Checkpoints (Make Sure Everything Works) ✅
+### Verification Checklist
 
-- [ ] Bot is online (green dot)
-- [ ] You can type `/` and see bot commands
-- [ ] `/warn` command works
-- [ ] `/setup dashboard` shows your server info
-- [ ] You can mute someone successfully
-- [ ] Logs appear in your chosen channel
-
-**Congratulations! 🎊** You're now a bot expert! Your Discord servers are safer and your moderators have superpowers.
+- [ ] Bot appears online with green status
+- [ ] Slash commands appear when typing `/`
+- [ ] `/warn` command functions correctly
+- [ ] `/setup dashboard` displays server information
+- [ ] Mute functionality works (if configured)
+- [ ] Notifications appear in configured channel
 
 ---
 
-⭐ **Tip:** Come back to the advanced sections when you're ready for fancy features like webhooks, analytics, and complex server networks!
-
----
-
-## 🚀 Features
+## Features
 
 ### Core Functionality
-- **🔗 Cross-Server Punishment Sync**: Real-time synchronization of punishments across linked servers
-- **🤖 Auto-Detection**: Monitors ban/unban events and propagates punishments automatically
-- **⚡ Slash Commands**: Modern Discord slash command interface with autocomplete
-- **📊 Audit Trail**: Complete logging and audit system for all moderation actions
-- **⏱️ Time-Based Punishments**: Support for temporary mutes, bans, and timeouts
-- **🔍 Reconciliation System**: Automatic detection and resolution of punishment inconsistencies
-- **❤️ Health Monitoring**: System health tracking and automated maintenance tasks
+
+- **Cross-server punishment synchronization**: Real-time propagation of moderation actions across linked servers
+- **Automatic event detection**: Monitors Discord events and triggers synchronization
+- **Modern slash commands**: Full Discord slash command support with autocomplete
+- **Comprehensive audit logging**: Complete track of all moderation actions and changes
+- **Time-based punishments**: Support for temporary actions with automatic expiration
+- **Reconciliation system**: Automatic detection and resolution of inconsistencies
+- **Health monitoring**: System diagnostics and performance tracking
 
 ### Moderation Actions
-- `/ban` - Cross-server ban with automatic sync
-- `/unban` - Cross-server unban with automatic sync
-- `/kick` - Cross-server kick with logging
-- `/mute` - Timed or permanent mute with role management
-- `/timeout` - Discord timeout with cross-server sync
-- `/warn` - Warning system with warning count tracking
 
-### Server Architecture
-- **Dynamic Guild Relationships**: No hardcoded guild IDs - configure anywhere
-- **Relationship Types**: Main-child hierarchy with different sync modes
-- **Multi-Server Networks**: Support for complex server networks and hierarchies
-- **Permission-Based Access**: Role-based command access control
+- `/ban` - Ban users across linked servers
+- `/unban` - Remove bans across linked servers
+- `/kick` - Kick users from linked servers
+- `/mute` - Apply timed or permanent mutes
+- `/timeout` - Discord timeout synchronization
+- `/warn` - Issue warnings with tracking
 
-### Administrative Features
-- **Setup Wizards**: Interactive setup processes for different scenarios
-- **Configuration Dashboard**: Real-time system status and health
-- **Audit Commands**: Advanced search and export capabilities
-- **Notification System**: Webhook and channel-based notifications
-- **CSV Export**: Audit log export functionality
+### Server Management
+
+- **Dynamic server relationships**: Flexible configuration without hardcoded IDs
+- **Relationship types**: Support for different sync modes (sync, monitor, backup)
+- **Multi-server networks**: Complex hierarchical server architectures
+- **Permission-based access**: Role-based command authorization
+
+### Administration Tools
+
+- **Setup wizards**: Guided configuration for different scenarios
+- **Configuration dashboard**: Real-time system monitoring
+- **Advanced audit commands**: Search, filter, and export moderation logs
+- **Notification system**: Webhook and channel notifications
+- **Data export**: CSV export capabilities for audit data
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 ### System Components
 
