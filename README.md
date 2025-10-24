@@ -4,8 +4,6 @@
 [![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)](https://github.com)
 [![Python](https://img.shields.io/badge/python-3.8+-brightgreen.svg)](https://www.python.org/)
 [![Discord API](https://img.shields.io/badge/discord-api--v2.3+-7289da.svg)](https://discord.com/developers/docs/intro)
-[![Security](https://img.shields.io/badge/security-ZERO--LEAK-critical.svg)](https://github.com)
-[![Status](https://img.shields.io/badge/status-production--ready-green.svg)](https://github.com)
 [![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg)](https://github.com)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com)
 [![Database](https://img.shields.io/badge/database-SQLite-yellow.svg)](https://sqlite.org/)
