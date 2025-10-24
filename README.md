@@ -1,1356 +1,1000 @@
+
 # Wayhaven Enforcer Bot
 
-<p align="center">
-  <img src="https://img.shields.io/badge/version-2.0-blue.svg" alt="Version">
-  <img src="https://img.shields.io/badge/python-3.8+-blue.svg" alt="Python Version">
-  <img src="https://img.shields.io/badge/discord.py-2.3.0+-blue.svg" alt="Discord.py">
-  <img src="https://img.shields.io/badge/status-stable-green.svg" alt="Status">
-  <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
-</p>
-
-<p align="center">
-  <strong>Enterprise-grade Discord moderation bot with cross-server punishment synchronization</strong>
-</p>
+[![Version](https://img.shields.io/badge/version-2.1.0-blue.svg)](https://github.com)
+[![Python](https://img.shields.io/badge/python-3.8+-brightgreen.svg)](https://www.python.org/)
+[![Discord API](https://img.shields.io/badge/discord-api--v2.3+-7289da.svg)](https://discord.com/developers/docs/intro)
+[![Security](https://img.shields.io/badge/security-ZERO--LEAK-critical.svg)](https://github.com)
+[![Status](https://img.shields.io/badge/status-production--ready-green.svg)](https://github.com)
+[![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20Mac%20%7C%20Linux-lightgrey.svg)](https://github.com)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com)
+[![Database](https://img.shields.io/badge/database-SQLite-yellow.svg)](https://sqlite.org/)
+[![Commands](https://img.shields.io/badge/commands-slash%20commands-orange.svg)](https://discord.com/developers/docs/interactions/slash-commands)
 
 ---
 
-## Table of Contents
+## 📚 Getting Started
 
-- [About](#-about)
-- [Features](#-features)
-- [Getting Started](#-getting-started)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Commands](#-commands)
-- [Architecture](#-architecture)
-- [Setup Wizards](#-setup-wizards)
-- [Advanced Features](#-advanced-features)
-- [Monitoring](#-monitoring)
-- [Migration Guide](#-migration-guide)
-- [Troubleshooting](#-troubleshooting)
-- [API Reference](#-api-reference)
-- [Contributing](#-contributing)
-- [License](#-license)
+### What is Wayhaven Enforcer?
 
----
+Imagine you have a school with many classrooms and playgrounds. Sometimes a student might break rules in one classroom and then try to run to another classroom to keep causing trouble. That's not fair to the other students who follow the rules!
 
-## About
+**Wayhaven Enforcer** is like having a Principal who can see what happens in ALL the classrooms at once. When a student gets in trouble in the cafeteria, they automatically get the same fair consequence in the gym, library, and computer lab too. No more running between classrooms to avoid getting caught!
 
-Wayhaven Enforcer is like a helpful assistant that watches over your Discord servers. Think of it like a friendly crossing guard who makes sure the same rules apply everywhere. When someone breaks a rule on one server, they're automatically disciplined on all your connected servers too.
+### How It Works (School Analogy)
 
-The bot is built strong and reliable, so you can use it whether you have just a few friends or thousands of people in your community.
+Think of Wayhaven like a school rule system that works across multiple class periods:
 
-## What Makes This Bot Special
+**The Problem:** A student gets in trouble in Math class for talking too much. They just switch to Science class and keep talking.
 
-- **Fair Everywhere**: A punishment on one server applies to ALL your servers automatically
-- **Remembers Everything**: Keeps a detailed record of all moderation actions
-- **Fixes Mistakes**: Automatically finds and corrects any missed punishments
-- **Grows With You**: Works the same whether you have 2 servers or 20 servers
-- **Safety First**: Monitors itself to stay running and catch problems early
+**The Old Way:** Teachers have to communicate separately - messy and inconsistent.
 
----
+**Wayhaven's Solution:** Like having school-wide detention slips that apply everywhere automatically!
 
-## Features
+**Main Server (Principal's Office):** Can issue punishments that spread everywhere
+**Child Servers (Classrooms):** Get notified and follow the same rules, but can't punish the whole school
+**ZERO-LEAK Security:** Prevents any single teacher from accidentally punishing everyone
+**Complete Audit Trail:** Everyone knows who did what and when
 
-### Core Functionality
+### Key Features
 
-- Cross-server punishment synchronization
-- Automatic event detection and propagation
-- Time-based punishments (timeouts, temporary mutes)
-- Audit logging and reporting
-- System health monitoring
-- Automatic reconciliation
+| Feature | Description |
+|---------|-------------|
+| **Cross-Server Sync** | Punishments from main server automatically apply to all connected servers |
+| **ZERO-LEAK Security** | Only designated main servers can spread punishments - maximum safety |
+| **Complete Audit System** | Every action logged with full compliance tracking |
+| **Professional Moderation** | Ban, kick, mute, timeout, and warning commands |
+| **GDPR Compliant** | Built-in data protection and user rights management |
+| **Easy Setup** | Step-by-step configuration wizard for any skill level |
 
-### Moderation Actions
+### Quick Benefits
 
-- `/ban` - Ban users across linked servers
-- `/unban` - Remove bans across linked servers
-- `/kick` - Kick users from multiple servers
-- `/mute` - Apply timed or permanent mutes
-- `/timeout` - Discord timeout with synchronization
-- `/warn` - Issue warnings with tracking
-
-### Administrative Features
-
-- Dynamic server relationship management
-- Multiple relationship types (sync, monitor, backup)
-- Webhook notifications
-- CSV audit export
-- Command-line interface
-- Database maintenance tools
+- **Consistent Rules:** Same consequences across all your Discord servers
+- **No More Rule Breakers:** Users can't just switch servers to avoid punishment
+- **Professional Management:** Enterprise-grade moderation tools
+- **Complete Visibility:** Full audit trail of all moderation actions
+- **Safe & Secure:** ZERO-LEAK protection prevents accidental network-wide punishments
 
 ---
 
-## Getting Started
-
-🎯 **First time setting up a Discord bot? No worries!** Follow these steps and you'll be all set up in no time. Think of this like building with Legos - each piece fits together perfectly.
-
-### What This Bot Does
-
-Imagine you have a rule like "No fighting on the playground!" But you have 3 different playgrounds (Discord servers). Normally, if someone gets in trouble on Playground A, they might go to Playground B and keep causing problems.
-
-**This bot solves that problem!** It's like having a crossing guard who watches ALL the playgrounds. When someone breaks a rule on ANY playground, they get the same punishment everywhere.
-
-Here's how it works:
-- **Ban someone on one server** → They're automatically banned on all your servers
-- **Mute someone for 1 hour** → They're muted for exactly 1 hour on every server
-- **Warn someone** → That warning counts everywhere
-- **No more "server hopping"** → Troublemakers can't just move to another server to avoid punishment!
-
-The bot is super smart - it remembers everything and keeps all your servers fair and safe.
-
----
-
-### Step 1: Get Your Bot Token
-
-Every bot needs a token to join Discord. Create your bot at the [Discord Developer Portal](https://discord.com/developers/applications):
-
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Click "New Application"
-3. Name your application (e.g., "Wayhaven Enforcer")
-4. Go to the "Bot" section and click "Add Bot"
-5. Copy the token - keep this secret!
-
-### Step 2: Download and Install
-
-1. Download the bot files from GitHub
-2. Extract them to a folder on your computer
-3. Install Python 3.8+ if you don't have it
-4. Open a terminal/command prompt in the bot folder
-
-### Step 3: Setup the Bot
-
-1. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. Create the database:
-   ```bash
-   python setup_database.py
-   ```
-
-3. Create a `.env` file in the bot folder:
-   ```env
-   BOT_TOKEN=your_bot_token_here
-   APPLICATION_ID=your_application_id_beginning_number
-   CLIENT_ID=your_client_id_number
-   MAIN_GUILD_ID=your_main_server_id
-   TEST_GUILD_ID=your_test_server_id
-   DEBUG=false
-   ```
-
-   To find your server IDs: Right-click your server icon → "Copy ID" (Developer Mode must be enabled).
-
-### Step 4: Invite Bot to Discord
-
-1. Generate the invite URL:
-   ```
-   https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=268561488&scope=bot%20applications.commands
-   ```
-
-2. Click the URL and invite the bot to your server
-
-3. Start the bot:
-   ```bash
-   python bot.py
-   ```
-
-   You should see confirmation messages that the bot connected successfully.
-
----
-
-### Step 5: Configure Basic Settings
-
-Configure the bot's basic moderation settings:
-
-1. **Set Mute Role**
-   ```
-   /config muterole role:@Muted
-   ```
-   (Create the @Muted role first if it doesn't exist)
-
-2. **Configure Log Channel**
-   ```
-   /config notifications channel:#mod-logs enabled:true
-   ```
-   (This channel will show moderation notifications)
-
-3. **Test Basic Functionality**
-   ```
-   /warn user:@testuser reason:Testing the bot
-   ```
-   (You should see a warning message appear)
-
----
-
-### Step 6: Learn Basic Commands
-
-The bot supports several key moderation commands:
-
-**Issue a Warning**
-```
-/warn user:@username reason:Breaking server rules
-```
-
-**Apply a Timed Mute**
-```
-/mute user:@username duration:1h reason:Disruptive behavior
-```
-
-**Ban a User Across Servers**
-```
-/ban user:@username reason:Violation of community guidelines
-```
-
-**Unban a User**
-```
-/unban user:123456789 reason:Appeal accepted
-```
-
-*Note: Use Discord's "Copy ID" feature to get user IDs (enable Developer Mode first)*
-
----
-
-### Step 7: Connect Multiple Servers (Optional)
-
-For network-wide moderation, connect your servers:
-
-1. **Set Main Server**
-   ```
-   /setup main-guild
-   ```
-
-2. **Add Child Servers**
-   ```
-   /setup add-child guild-id:123456789012345678
-   ```
-   (Get server ID by right-clicking server icon → Copy ID)
-
-3. **Verify Setup**
-   ```
-   /setup dashboard
-   ```
-
-Once connected, punishments applied on one server automatically sync to linked servers.
-
----
-
-### Troubleshooting Common Issues
-
-**Bot not responding to commands:**
-- Check if bot is online with a green status
-- Verify admin permissions were granted
-- Try typing `/` to see if commands appear
-- Check `bot.log` for error messages
-
-**Permission denied for admin commands:**
-- You need Administrator role or equivalent permissions
-- Contact server owner for proper role assignment
-
-**Mute functionality not working:**
-- Bot role must be higher than @Muted role
-- Check @Muted role permissions
-- Test with `/warn` first to ensure basic functionality
-
-**Commands not executing:**
-- Confirm bot has "Use Slash Commands" permission
-- Try `/setup dashboard` for diagnostics
-- Restart bot if needed
-
----
-
-### Verification Checklist
-
-- [ ] Bot appears online with green status
-- [ ] Slash commands appear when typing `/`
-- [ ] `/warn` command functions correctly
-- [ ] `/setup dashboard` displays server information
-- [ ] Mute functionality works (if configured)
-- [ ] Notifications appear in configured channel
-
----
-
-## Features
-
-### Core Functionality
-
-- **Cross-server punishment synchronization**: Real-time propagation of moderation actions across linked servers
-- **Automatic event detection**: Monitors Discord events and triggers synchronization
-- **Modern slash commands**: Full Discord slash command support with autocomplete
-- **Comprehensive audit logging**: Complete track of all moderation actions and changes
-- **Time-based punishments**: Support for temporary actions with automatic expiration
-- **Reconciliation system**: Automatic detection and resolution of inconsistencies
-- **Health monitoring**: System diagnostics and performance tracking
-
-### Moderation Actions
-
-- `/ban` - Ban users across linked servers
-- `/unban` - Remove bans across linked servers
-- `/kick` - Kick users from linked servers
-- `/mute` - Apply timed or permanent mutes
-- `/timeout` - Discord timeout synchronization
-- `/warn` - Issue warnings with tracking
-
-### Server Management
-
-- **Dynamic server relationships**: Flexible configuration without hardcoded IDs
-- **Relationship types**: Support for different sync modes (sync, monitor, backup)
-- **Multi-server networks**: Complex hierarchical server architectures
-- **Permission-based access**: Role-based command authorization
-
-### Administration Tools
-
-- **Setup wizards**: Guided configuration for different scenarios
-- **Configuration dashboard**: Real-time system monitoring
-- **Advanced audit commands**: Search, filter, and export moderation logs
-- **Notification system**: Webhook and channel notifications
-- **Data export**: CSV export capabilities for audit data
-
----
-
-## Architecture Overview
-
-### System Components
-
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Main Guild    │◄──►│   Sync Engine   │◄──►│  Child Guilds   │
-│                 │    │                 │    │                 │
-│ • Command Hub   │    │ • Queue System  │    │ • Auto-Sync     │
-│ • Audit Logs    │    │ • Rate Limiting │    │ • Notifications │
-│ • Dashboard     │    │ • Error Handling│    │ • Reconciliation│
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-                              ▲
-                              │
-                       ┌─────────────────┐
-                       │  SQLite Database│
-                       │                 │
-                       │ • Punishments   │
-                       │ • Guild Config  │
-                       │ • Audit Trail   │
-                       │ • Relationships │
-                       └─────────────────┘
-```
-
-### Data Flow
-
-1. **Command Execution**: User issues punishment command in any linked guild
-2. **Database Recording**: Punishment details stored with unique event ID
-3. **Queue Processing**: Sync engine processes punishments in background queue
-4. **Cross-Server Sync**: Punishment applied to all configured linked servers
-5. **Audit Logging**: All actions logged to database and notified via channels/webhooks
-6. **Reconciliation**: Automatic checks ensure consistency across servers
-
-### Security Model
-
-- **Role-Based Access**: Commands require specific Discord permissions
-- **Audit Trail**: All actions are logged with moderator and reason tracking
-- **Rate Limiting**: Built-in delays prevent Discord API abuse
-- **Permission Validation**: Real-time permission checking before actions
-
----
-
-## 🛠 Installation & Setup
+## 🛠️ Installation & Setup
 
 ### Prerequisites
 
-- **Python 3.8+** (recommended: 3.9+)
-- **Discord Bot Token** from [Discord Developer Portal](https://discord.com/developers/applications)
-- **Administrative Access** in target Discord servers
-- **Stable Internet Connection** for real-time sync
+Before you begin, ensure you have:
 
-### Required Discord Permissions
+| Requirement | Version | Purpose |
+|-------------|---------|---------|
+| **Python** | 3.8 or higher | Main programming language |
+| **Discord Account** | Any | For bot creation and server management |
+| **Administrator Access** | Required | Full control of Discord servers |
 
-The bot needs these permissions in ALL servers:
+### Step 1: Install Python
 
+Python is the "language" that tells your computer how to run Wayhaven. It's completely free!
+
+#### Windows Installation:
+1. Visit `https://python.org/downloads/`
+2. Click the yellow "Download Python 3.12.0" button
+3. Run the downloaded installer
+4. **IMPORTANT:** Check the box "Add Python to PATH"
+5. Click "Install Now" and wait 2-3 minutes
+
+#### Mac Installation:
+1. Visit `https://python.org/downloads/`
+2. Download the macOS installer
+3. Double-click the .pkg file to install
+4. Open Terminal and test with: `python3 --version`
+
+#### Linux Installation:
+```bash
+# Ubuntu/Debian:
+sudo apt update && sudo apt install python3 python3-pip -y
+
+# Fedora/RHEL:
+sudo dnf install python3 python3-pip -y
+
+# Test installation:
+python3 --version
+pip3 --version
 ```
-✅ Read Messages          ✅ Send Messages
-✅ Use Slash Commands     ✅ Ban Members
-✅ Kick Members           ✅ Moderate Members (for timeout)
-✅ Manage Roles           ✅ View Audit Log
-✅ Read Message History   ✅ Embed Links
-```
 
-### Step-by-Step Installation
+### Step 2: Download Bot Files
 
-#### 1. Download & Extract
+1. **Get the source code:**
+   - Download from your repository
+   - Click the green "Code" button
+   - Select "Download ZIP"
+   - Save to Desktop or Documents folder
+
+2. **Extract the ZIP file** (right-click → Extract All)
+
+3. **Verify file structure:**
+   ```
+   📁 bot.py           # Main bot brain
+   📁 database.py      # Memory system
+   📁 config.py        # Settings brain
+   📁 requirements.txt # List of helpers needed
+   📁 cogs/           # Bot command modules
+       📁 punishments.py   # Warning/mute/ban commands
+       📁 sync.py         # Cross-server spreading
+       📁 setup_cog.py    # Server configuration
+       📁 audit.py        # Who did what tracking
+   ```
+
+### Step 3: Install Dependencies
 
 ```bash
-# Clone or download the bot files
-git clone <repository-url>
-cd "Wayhaven Punishment sync bot"
-```
+# Navigate to bot folder (adjust path as needed)
+cd "path/to/your/bot/folder"
 
-#### 2. Create Virtual Environment
-
-```bash
-# Create isolated Python environment
-python -m venv venv
-
-# Activate environment
-# Windows:
-venv\Scripts\activate
-# Linux/Mac:
-source venv/bin/activate
-```
-
-#### 3. Install Dependencies
-
-```bash
+# Install all required packages
 pip install -r requirements.txt
 ```
 
-#### 4. Create Bot Application
+**What gets installed:**
+- `discord.py` - Discord API integration
+- `python-dotenv` - Environment variable management
+- `aiosqlite` - Database operations
+- `sqlalchemy` - Database toolkit
+- `aiofiles` - File operations
 
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
-2. Click "New Application" → Name: "Wayhaven Enforcer"
-3. Go to "Bot" section → Click "Add Bot"
-4. Copy the **Bot Token** (keep this secret!)
-
-#### 5. Configure Environment
-
+**If you encounter errors, try:**
 ```bash
-# Copy template (update with your token)
-cp .env.example .env
+# Alternative installation methods
+pip3 install -r requirements.txt
+python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
-Edit `.env` file:
+### Step 4: Create Discord Bot Account
+
+**⚠️ IMPORTANT:** You must be a server administrator to complete this step!
+
+#### Create Application:
+1. Go to `https://discord.com/developers/applications`
+2. Click "New Application" (blue button, top right)
+3. Name it "Wayhaven Enforcer" or your preferred name
+4. Accept terms and conditions
+
+#### Create Bot User:
+1. Click "Bot" in the left sidebar
+2. Click "Add Bot" button
+3. Skip special privileges for now
+4. Set an avatar if desired
+
+#### Get Bot Token:
+1. Under "Token" section, click "Copy"
+2. **⚠️ SECURITY:** Keep this token secret like a password
+3. Never share in chat or save in plain text files
+
+#### Configure Permissions:
+1. Scroll to "Bot Permissions" section
+2. Enable ALL these permissions:
+   - ✅ Read Messages/View Channels
+   - ✅ Send Messages
+   - ✅ Use Slash Commands
+   - ✅ Ban Members
+   - ✅ Kick Members
+   - ✅ Manage Roles
+   - ✅ Moderate Members
+   - ✅ View Audit Log
+   - ✅ Read Message History
+
+3. Copy the permission number (typically 268561488)
+4. Note the Application ID from "General Information"
+
+#### Invite Bot to Servers:
+1. Go to OAuth2 → URL Generator
+2. Check "bot" and "applications.commands"
+3. Copy the generated invite URL
+4. Paste in browser and authorize for each server
+5. Verify bot appears online in member list
+
+**Note:** Invite the bot to EVERY server you want to moderate!
+
+### Step 5: Configuration Setup
+
+Create a `.env` file in your bot folder:
+
 ```env
-BOT_TOKEN=your_bot_token_here
-APPLICATION_ID=your_application_id
-CLIENT_ID=your_client_id
-CLIENT_SECRET=your_client_secret
-MAIN_GUILD_ID=your_main_server_id
-TEST_GUILD_ID=your_test_server_id
+# Wayhaven Enforcer Configuration
+# Replace with your actual values!
+
+# Bot Account Information
+BOT_TOKEN=your_secret_token_here_really_replace_this
+APPLICATION_ID=123456789012345678
+CLIENT_ID=123456789012345678
+
+# Main Server (Principal's Office)
+# Right-click server name → Copy ID
+MAIN_GUILD_ID=987654321098765432
+
+# Optional: Test server for practice
+TEST_GUILD_ID=876543210987654321
+
+# Advanced Settings (leave default for now)
 DEBUG=false
+DATABASE_URL=sqlite+aiosqlite:///wayhaven_enforcer.db
 ```
 
-#### 6. Initialize Database
+**Common Configuration Mistakes:**
+- Don't add quotes around values unless they contain spaces
+- Ensure server IDs are 18+ digits long (copy carefully)
+- Regenerate token immediately if compromised
+
+### Step 6: Database Initialization
 
 ```bash
+# Initialize the bot's memory system
 python setup_database.py
 ```
 
-#### 7. Start the Bot
+**Expected Success Output:**
+```
+Wayhaven Enforcer Database Setup
+Creating database tables...
+✅ Created punishments table
+✅ Created guild_relationships table (ZERO-LEAK enabled)
+✅ Created command_audit table (100% compliance)
+✅ Created security_alerts table
+✅ Created system_health table
+✅ Database initialization complete!
+⚠️  IMMUTABLE SECURITY: Database locked for ZERO-LEAK protection
+🔒 Ready for bot startup
+```
+
+**Database:** Uses SQLite (no MySQL/PostgreSQL required for standard deployments)
+
+### Step 7: First Launch
 
 ```bash
+# Start the bot for the first time
 python bot.py
 ```
 
-**Expected Output:**
+**Expected Startup Output:**
 ```
-INFO - WayhavenEnforcer - Bot started successfully
-INFO - WayhavenEnforcer - Connected to Discord
-INFO - WayhavenEnforcer - Loaded 6 cogs
-INFO - WayhavenEnforcer - Slash commands synced
+Starting Wayhaven Enforcer v2.1.0...
+Zero-Leak Security: ACTIVE
+Database: Connected
+Loading cogs...
+✅ Loaded punishments
+✅ Loaded sync
+✅ Loaded setup_cog
+✅ Loaded audit
+✅ Loaded reconciliation
+✅ Slash commands synced globally
+Wayhaven Enforcer is ready!
+
+Logged in as:
+Wayhaven Enforcer#1234
+Connected to 3 servers
 ```
 
-#### 8. Invite Bot to Servers
+### Step 8: Server Configuration
 
-Generate invite URL: `https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&permissions=268561488&scope=bot%20applications.commands`
+#### Create Required Roles:
+1. **Go to Server Settings → Roles**
+2. **Create "Muted" role:**
+   - Color: Orange or red
+   - Deny: Send Messages, Send Messages in Threads, Speak in voice
+   - Allow: View channels (for timeout visibility)
 
-**Minimum Required Permissions:** `268,561,488`
+#### Create Moderation Channels:
+1. **Create #moderation-logs:**
+   - Hide from regular members
+   - Used for punishment logging
+2. **Create #security-alerts:**
+   - Hide from everyone except admins
+   - Used for system security notifications
 
----
+#### Configure Bot Settings:
+```
+/config muterole role:@Muted
+/config notifications channel:#moderation-logs enabled:true
+/config logchannel channel:#security-alerts
+```
 
-## 🧙 Step-by-Step Setup Wizards
+#### Set Up Main Server:
+```
+/setup main-guild
+```
 
-### Wizard 1: Single Server Setup
+**This designates your server as the "Principal's Office" - punishments here spread everywhere!**
 
-**For servers that want basic moderation without cross-server sync**
+#### Connect Child Servers:
+```
+/setup add-child guild-id:123456789012345678
+```
 
-1. **Invite Bot** to your server
-2. **Set Basic Configuration**
-   ```discord
-   /config muterole role:@Muted
-   /config logchannel channel:#mod-logs
-   /config notifications channel:#mod-alerts enabled:true
-   ```
-3. **Test Commands**
-   ```discord
-   /warn user:@baduser reason:Testing warnings
-   ```
-4. **View Dashboard**
-   ```discord
-   /setup dashboard
-   ```
-
-### Wizard 2: Main Server Setup
-
-**For servers that will be the central moderation hub**
-
-1. **Configure Basic Settings**
-   ```discord
-   /setup main-guild  # Set as main guild
-   /config muterole role:@Muted
-   /config logchannel channel:#sync-logs
-   /config webhook webhook-url:"https://discord.com/api/webhooks/..."
-   ```
-
-2. **Create Backup Channels**
-   ```discord
-   # Create these channels first
-   #mod-commands, #sync-notifications, #reconciliation-alerts
-   /config notifications channel:#sync-notifications enabled:true
-   /config logchannel channel:#mod-commands
-   ```
-
-3. **Set Security Roles**
-   ```discord
-   # Create and assign staff role with proper permissions
-   /config staffrole role:@Server Staff
-   ```
-
-4. **Test Configuration**
-   ```discord
-   /config show  # Verify all settings
-   ```
-
-### Wizard 3: Child Server Linking
-
-**For servers that want to join an existing moderation network**
-
-1. **Get Main Guild ID**
-   ```
-   Right-click main server → Copy ID (Developer Mode must be ON)
-   Main Guild ID: 123456789012345678
-   ```
-
-2. **Link to Main Guild**
-   ```discord
-   /guildlink guild-id:123456789012345678 mode:MAIN_ONLY
-   ```
-
-3. **Configure Local Settings**
-   ```discord
-   /config muterole role:@Muted
-   /config notifications channel:#moderation enabled:true
-   ```
-
-4. **Verify Connection**
-   ```discord
-   /setup test-connection guild-id:123456789012345678
-   ```
-
-### Wizard 4: Multi-Server Network Setup
-
-**For complex networks with multiple main servers**
-
-1. **Server Architecture Planning**
-   ```
-   Hierarchy: Main A → Child B, Child C
-   Hierarchy: Main X → Child Y, Child Z
-   Bidirectional: Main A ↔ Main X
-   ```
-
-2. **Setup Each Main Server**
-   ```discord
-   # Server A (Main)
-   /setup main-guild
-   /setup add-child guild-id:BBBBBBBBBBBBBBBBB relationship-type:sync
-   /setup add-child guild-id:CCCCCCCCCCCCCCCCC relationship-type:sync
-
-   # Server X (Main)
-   /setup main-guild
-   /setup add-child guild-id:YYYYYYYYYYYYYYYYY relationship-type:monitor
-   /guildlink guild-id:AAAAAAAAAAAAAAAAAAAA mode:BIDIRECTIONAL
-   ```
-
-3. **Configure Sync Actions**
-   ```discord
-   # Default actions: ban, unban, kick, mute, warn, timeout
-   # Customize per relationship in database if needed
-   ```
-
-4. **Setup Monitoring**
-   ```discord
-   # Set up webhook for cross-network alerts
-   /config webhook webhook-url:"https://discord.com/api/webhooks/..."
-   /setup dashboard  # Check status
-   ```
-
-### Wizard 5: Emergency/Backup Server Setup
-
-**For servers that only receive syncs during emergencies**
-
-1. **Configure as Backup**
-   ```discord
-   /guildlink guild-id:MAINGUILDID mode:MAIN_ONLY
-   # Actions will only sync during reconciliation or manual triggers
-   ```
-
-2. **Setup Alert System**
-   ```discord
-   /config webhook webhook-url:"https://discord.com/api/webhooks/..."
-   ```
+Repeat for each server you want to connect. Child servers receive punishments from main server but cannot spread punishments themselves (ZERO-LEAK safety).
 
 ---
 
 ## ⚙️ Configuration
 
-### Environment Variables (.env)
+### Server Roles Setup
 
-```env
-# Required Settings
-BOT_TOKEN=MTE0MjM0...  # Your Discord bot token
-APPLICATION_ID=1423440206492729364  # Bot application ID
-CLIENT_ID=1423440206492729364       # Client ID
-CLIENT_SECRET=secret_here            # Client secret
-MAIN_GUILD_ID=your_main_server_id   # Primary server ID
-TEST_GUILD_ID=test_server_id        # Development server ID
+#### Required Roles:
+| Role | Purpose | Permissions |
+|------|---------|-------------|
+| **Muted** | Timeout users | Deny: Send Messages, Speak |
+| **Moderator** | Basic moderation | Use warn, timeout commands |
+| **Admin** | Full moderation | All commands including ban/unban |
 
-# Optional Settings
-DATABASE_URL=sqlite+aiosqlite:///wayhaven_enforcer.db
-DEBUG=false                          # Enable debug logging
-SYNC_DELAY=2                         # Seconds between sync operations
-RECONCILIATION_INTERVAL=21600        # 6 hours in seconds
+#### Role Hierarchy:
+```
+Server Owner (Full Access)
+├── Administrators (Setup, Ban/Unban, Network Management)
+├── Moderators (Warn, Mute, Timeout, Kick)
+└── Child Server Staff (Local warnings/kicks only)
 ```
 
-### Advanced Configuration Options
-
-#### Sync Settings
-```python
-# In config.py - adjust these for performance
-SYNC_DELAY = 2          # Rate limiting (1-5 seconds)
-MAX_RETRY_ATTEMPTS = 3  # API failure retries
-```
-
-#### Reconciliation Timing
-```python
-RECONCILIATION_INTERVAL = 21600  # Check every 6 hours
-```
-
-#### Color Scheme
-```python
-COLORS = {
-    'success': 0x00ff00,    # Green
-    'error': 0xff0000,      # Red
-    'warning': 0xffff00,    # Yellow
-    'info': 0x0099ff,       # Blue
-    'ban': 0xff0000,        # Red
-    'mute': 0xffa500,       # Orange
-    'kick': 0xff6b6b,       # Light Red
-    'warn': 0xffff00,       # Yellow
-}
-```
-
-#### Notification Templates
-
-All notifications use embedded messages with:
-- **Action Icons**: 🔨 (ban), ✅ (unban), 🔇 (mute), ⚠️ (warn)
-- **Color Coding**: Action-specific colors
-- **Timestamps**: UTC time with relative formatting
-- **Structured Data**: User, moderator, reason, expiration
-
----
-
-## 📚 Complete Command Reference
-
-### 🔗 Setup Commands (`/setup`)
-
-| Command | Description | Permissions | Example |
-|---------|-------------|-------------|---------|
-| `/setup main-guild` | Set server as main guild | Administrator | `/setup main-guild` |
-| `/setup add-child` | Link child server | Administrator | `/setup add-child guild-id:123456789` |
-| `/setup remove-child` | Remove child server | Administrator | `/setup remove-child guild-id:123456789` |
-| `/setup test-connection` | Test server connection | Administrator | `/setup test-connection guild-id:123456789` |
-| `/setup config-wizard` | Start setup wizard | Administrator | `/setup config-wizard` |
-| `/setup dashboard` | View configuration dashboard | Administrator | `/setup dashboard` |
-
-### ⚙️ Configuration Commands (`/config`)
-
-| Command | Description | Permissions | Example |
-|---------|-------------|-------------|---------|
-| `/config muterole` | Set mute role | Administrator | `/config muterole role:@Muted` |
-| `/config logchannel` | Set log channel | Administrator | `/config logchannel channel:#logs` |
-| `/config notifications` | Set notification channel | Administrator | `/config notifications channel:#alerts enabled:true` |
-| `/config webhook` | Set webhook URL | Administrator | `/config webhook webhook-url:"https://..."` |
-| `/config show` | Show current config | Administrator | `/config show` |
-| `/guildlink` | Link to another guild | Administrator | `/guildlink guild-id:123456789 mode:MAIN_ONLY` |
-| `/config unlink` | Remove guild link | Administrator | `/config unlink guild-id:123456789` |
-
-### 🔨 Moderation Commands
-
-| Command | Description | Permissions | Example |
-|---------|-------------|-------------|---------|
-| `/ban` | Ban user across servers | Ban Members | `/ban user:@user reason:Spam` |
-| `/unban` | Unban user across servers | Ban Members | `/unban user:123456789 reason:Appeal accepted` |
-| `/kick` | Kick user across servers | Kick Members | `/kick user:@troublemaker reason:Disruption` |
-| `/mute` | Mute user with duration | Manage Roles | `/mute user:@user duration:1d reason:Flooding` |
-| `/timeout` | Discord timeout | Moderate Members | `/timeout user:@user duration:2h reason:Trolling` |
-| `/warn` | Issue warning | Moderate Members | `/warn user:@user reason:Inappropriate content` |
-
-### 📊 Audit Commands (`/audit`)
-
-| Command | Description | Permissions | Example |
-|---------|-------------|-------------|---------|
-| `/audit log` | View user's punishment history | Moderate Members | `/audit log user:@user days:30` |
-| `/audit stats` | View server statistics | Moderate Members | `/audit stats days:7` |
-| `/audit warnings` | View user's warnings | Moderate Members | `/audit warnings user:@user` |
-| `/audit search` | Search audit logs | Moderate Members | `/audit search action:ban days:7` |
-| `/audit export` | Export logs to CSV | Administrator | `/audit export days:30` |
-
-### 🔍 Reconciliation Commands (`/reconcile`)
-
-| Command | Description | Permissions | Example |
-|---------|-------------|-------------|---------|
-| `/reconcile check` | Check discrepancies | Administrator | `/reconcile check` |
-| `/reconcile fix` | Fix discrepancies | Administrator | `/reconcile fix dry-run:true` |
-| `/reconcile status` | Show reconciliation status | Administrator | `/reconcile status` |
-
-### 🔄 Sync Commands (`/sync`)
-
-| Command | Description | Permissions | Example |
-|---------|-------------|-------------|---------|
-| `/forcesync` | Force sync user's punishments | Administrator | `/forcesync user:@user` |
-| `/syncstatus` | Show sync system status | Administrator | `/syncstatus` |
-
----
-
-## 🔄 How Everything Works
-
-### 1. Command Execution Flow
-
-```
-User Command → Permission Check → Database Entry → Event Queue → Sync Processing
-       ↓             ↓              ↓              ↓            ↓
-    Validate    Check Roles     Create Event    Queue Event  Process Sync
-```
-
-### 2. Punishment Synchronization Mechanism
-
-```
-Main Guild Action ──┐
-                     ├── Event Detection (Automatic)
-Punishment Issued ───┤
-                     └── Manual Command (Slash Commands)
-
-                        ↓
-
-Database Recording ── Event ID Created ── Audit Log Entry
-
-                        ↓
-
-Queue System ─────── Background Processing ── Rate Limiting Applied
-
-                        ↓
-
-Linked Guilds ────── Permission Checks ─── Action Applied ── Notification Sent
-     │                      │                      │                   │
-     └─ Child Guild 1      └─ Role Check          └─ Ban/Kick/Mute   └─ Webhook/Channel
-       Child Guild 2        API Call               Success/Failure    Audit Update
-       Child Guild 3        Error Handling         Database Update    Moderator Alert
-       Child Guild N        Retry Logic
-```
-
-### 3. Event Detection System
-
-- **Automatic Monitoring**: Listens for `on_member_ban`, `on_member_unban` events
-- **Audit Log Parsing**: Extracts moderator and reason from Discord audit logs
-- **Queue Processing**: Prevents rate limiting with configurable delays
-- **Error Handling**: Retry logic for failed API calls
-
-### 4. Database Architecture
-
-```sql
--- Core Tables
-punishments (events, users, actions, reasons, timestamps)
-guild_relationships (server links, sync settings)
-guild_settings (per-server configuration)
-audit_logs (detailed action history)
-system_health (monitoring and diagnostics)
-```
-
-### 5. Relationship Types
-
-- **Sync**: Full bidirectional synchronization
-- **Monitor**: One-way monitoring (child → main only)
-- **Backup**: Emergency backup (manual triggers only)
-
-### 6. Action Propagation Logic
-
-Each punishment goes through:
-
-1. **Pre-Check**: Permission validation, role verification
-2. **Recording**: Database entry with unique event ID
-3. **Queue**: Background processing queue
-4. **Execution**: Apply to linked servers with rate limiting
-5. **Verification**: Check success/failure
-6. **Notification**: Alert via webhooks/channels
-7. **Audit**: Log all actions for compliance
-
-### 7. Reconciliation System
-
-- **Periodic Checks**: Runs every 6 hours (configurable)
-- **Discrepancy Detection**: Compares ban lists across servers
-- **Auto-Resolution**: Fixes missing punishments
-- **Reporting**: Alerts in log channels for manual review
-- **Health Monitoring**: Tracks system status and performance
-
----
-
-## 🔧 Advanced Features
-
-### Custom Sync Actions
-
-Control which actions sync per relationship:
-
-```sql
--- Examples
-["ban", "unban"]              -- Ban sync only
-["mute", "kick", "warn"]      -- Light moderation
-["ban", "unban", "timeout"]   -- All heavy moderation
-```
-
-### Webhook Notifications
-
-```json
-{
-  "embeds": [{
-    "title": "🔨 User Banned (Synced)",
-    "color": 16711680,
-    "fields": [
-      {"name": "👤 User", "value": "@username (123456789)"},
-      {"name": "📝 Reason", "value": "Violation of rules"},
-      {"name": "🏠 Source Server", "value": "Main Server"}
-    ]
-  }]
-}
-```
-
-### Performance Tuning
-
-```python
-# config.py adjustments
-SYNC_DELAY = 1                    # Faster sync (higher rate limit risk)
-RECONCILIATION_INTERVAL = 3600    # Check hourly
-MAX_RETRY_ATTEMPTS = 5            # More resilient
-```
-
-### Complex Network Architectures
-
-#### Hierarchical Setup
-```
-Main Server A
-├── Child Server B
-├── Child Server C
-│   └── Child Server D (B's child)
-└── Child Server E
-```
-
-#### Group Setup
-```
-Cluster 1 ── Cluster 2
-├── Server A ── Server X
-├── Server B ── Server Y
-└── Server C ── Server Z
-```
-
-#### Hybrid Setup
-```
-Main Network + Independent Servers
-├── Synced Guilds (full sync)
-├── Monitored Guilds (alerts only)
-└── Backup Guilds (emergency only)
-```
-
----
-
-## 📊 Monitoring & Performance
-
-### Health Monitoring
-
-The bot tracks multiple components:
-
-- **Database**: Connection status, query performance
-- **API**: Discord API rate limits, response times
-- **Sync Engine**: Queue status, processing delays
-- **Reconciliation**: Scan completion, discrepancy counts
-
-### Performance Metrics
-
-```python
-# Track these metrics:
-sync_success_rate = successful_syncs / total_syncs * 100
-average_sync_time = total_time / sync_count
-queue_backlog = queue.size()
-error_rate = errors / total_operations * 100
-```
-
-### System Logs
-
-All actions logged to `bot.log`:
-
-```
-2025-01-20 10:30:15 - INFO - Sync completed: 3 successful, 0 failed
-2025-01-20 10:30:20 - WARNING - Rate limit approached, slowing sync
-2025-01-20 10:35:00 - INFO - Reconciliation found 1 discrepancy, auto-resolved
-```
-
-### Dashboard Information
-
-`/setup dashboard` shows:
-
-- Total linked guilds
-- Recent activity (7 days)
-- System health status
-- Sync performance metrics
-- Active tasks status
-
----
-
-## 🔄 Migration Guide v1→v2
-
-### What's New in v2.0
-
-1. **Dynamic Configuration**: No hardcoded guild IDs
-2. **Relationship System**: Flexible server linking
-3. **Health Monitoring**: System diagnostics
-4. **Enhanced Timeouts**: Discord timeout support
-5. **Queue System**: Better sync processing
-6. **Notification Webhooks**: Advanced alerting
-
-### Migration Steps
-
-#### Step 1: Backup Database
-
+### Channel Configuration
+
+#### Essential Channels:
+| Channel | Purpose | Privacy |
+|---------|---------|---------|
+| **#moderation-logs** | Punishment records | Staff only |
+| **#security-alerts** | System notifications | Admins only |
+| **#bot-commands** | Command usage | Public (optional) |
+
+#### Bot Configuration Commands:
 ```bash
-cp wayhaven_enforcer.db wayhaven_enforcer_v1_backup.db
+# Set mute role
+/config muterole role:@Muted
+
+# Configure notification channel
+/config notifications channel:#moderation-logs enabled:true
+
+# Set security alerts channel
+/config logchannel channel:#security-alerts
+
+# Enable audit logging
+/config audit enabled:true
 ```
 
-#### Step 2: Update Code
+### Main/Child Server Architecture
 
+#### Main Server (Principal's Office):
+- Can issue punishments that spread to all child servers
+- Full moderation capabilities
+- Central audit logging
+- Network management controls
+
+#### Child Servers (Classrooms):
+- Receive punishments from main server
+- Cannot spread punishments (ZERO-LEAK security)
+- Local moderation only (warnings, kicks)
+- Automatic sync compliance
+
+#### Setting Up Relationships:
 ```bash
-# Pull latest changes
-git pull origin main
-```
-
-#### Step 3: Install New Dependencies
-
-```bash
-pip install -r requirements.txt  # May include new packages
-```
-
-#### Step 4: Run Migration Script
-
-```bash
-python migrate_to_v2.py
-```
-
-**Expected Output:**
-```
-🛠️  Wayhaven Enforcer Database Migration v1 → v2
-==================================================
-INFO - Starting migration from v1 to v2...
-INFO - Current database version: 1.0
-INFO - Creating new tables...
-INFO - Adding indexes...
-INFO - Migrating existing guild links...
-INFO - Migration v1 -> v2 completed successfully!
-✅ Validation passed!
-```
-
-#### Step 5: Update Configuration
-
-Remove hardcoded values from `config.py`:
-
-```python
-# OLD (v1)
-MAIN_GUILD_ID = 123456789
-TEST_GUILD_ID = 987654321
-
-# NEW (v2) - Use environment variables
-MAIN_GUILD_ID = int(os.getenv('MAIN_GUILD_ID'))
-TEST_GUILD_ID = int(os.getenv('TEST_GUILD_ID'))
-```
-
-#### Step 6: Update Environment Variables
-
-```env
-# Add these new variables
-MAIN_GUILD_ID=your_main_server_id
-TEST_GUILD_ID=your_test_server_id
-DEBUG=false
-```
-
-#### Step 7: Reconfigure Server Relationships
-
-```discord
-# Recreate your server links using new commands
+# Designate main server
 /setup main-guild
-/setup add-child guild-id:987654321
 
-# Instead of old hardcoded configuration
-```
+# Link child servers
+/setup add-child guild-id:123456789012345678
 
-#### Step 8: Test New Features
+# Test connection
+/setup test-connection guild-id:123456789012345678
 
-```discord
-# Test new timeout command
-/timeout user:@testuser duration:5m reason:Testing v2.0
-
-# Check system health
+# View network status
 /setup dashboard
-
-# Test reconciliation
-/reconcile check
 ```
-
-#### Step 9: Monitor Migration
-
-```bash
-# Check logs for any issues
-tail -f bot.log
-
-# Verify all relationships
-/config show
-```
-
-### Rollback Plan
-
-If migration fails:
-
-1. **Stop Bot**: `Ctrl+C`
-2. **Restore Backup**: `cp wayhaven_enforcer_v1_backup.db wayhaven_enforcer.db`
-3. **Revert Code**: `git checkout v1.0`
-4. **Restart**: `python bot.py`
-
-### Migration Checklist
-
-- [ ] Database backed up
-- [ ] Migration script run successfully
-- [ ] Configuration updated
-- [ ] Environment variables set
-- [ ] Server relationships recreated
-- [ ] Permission tests passed
-- [ ] New commands tested
-- [ ] Webhooks configured
-- [ ] Dashboard operational
-- [ ] Logs monitoring active
 
 ---
 
-## 🆘 Troubleshooting & Support
+## 📋 Commands Reference
 
-### Common Issues
+### Moderation Commands
 
-#### "Bot not responding to commands"
-```
-✅ Check bot is online
-✅ Verify bot permissions in server settings
-✅ Confirm slash commands synced: `@bot-name`
-✅ Check bot.log for error messages
-```
+| Command | Description | Example | Permissions |
+|---------|-------------|---------|-------------|
+| `/ban user:@username reason:Spam` | Ban user across all linked servers | `/ban user:@Spammer reason:Excessive spam` | Administrator |
+| `/unban user:123456789 reason:Appeal` | Unban user from all servers | `/unban user:987654321 reason:Appeal approved` | Administrator |
+| `/kick user:@username reason:Disruption` | Remove user from current server | `/kick user:@Loud reason:Disrupting chat` | Moderator |
+| `/mute user:@username duration:30m reason:Spam` | Mute user temporarily | `/mute user:@Chatter duration:1h reason:Excessive talking` | Moderator |
+| `/timeout user:@username duration:2h reason:Argument` | Discord native timeout | `/timeout user:@Arguer duration:1d reason:Heated argument` | Moderator |
+| `/warn user:@username reason:First warning` | Send warning via DM | `/warn user:@Newbie reason:Please read rules` | Staff |
 
-#### "Sync not working"
-```
-✅ Test connection: /setup test-connection
-✅ Verify permissions in target server
-✅ Check rate limits in logs
-✅ Confirm relationship type allows sync
-```
+### Setup & Administration Commands
 
-#### "Mute role not working"
-```
-✅ Set mute role: /config muterole
-✅ Ensure bot has "Manage Roles" permission
-✅ Check role hierarchy (bot role above mute role)
-✅ Test role permissions manually
-```
+#### Server Linking:
+| Command | Purpose |
+|---------|---------|
+| `/setup main-guild` | Designate server as main hub |
+| `/setup add-child guild-id:123456789` | Link child server to main |
+| `/setup remove-child guild-id:123456789` | Remove server relationship |
+| `/setup test-connection guild-id:123456789` | Test server connectivity |
 
-#### "Database errors"
-```
-✅ Check database file exists
-✅ Verify write permissions on folder
-✅ Run integrity check: sqlite3 wayhaven_enforcer.db "PRAGMA integrity_check;"
-✅ Restore from backup if corrupted
-```
+#### Configuration:
+| Command | Purpose |
+|---------|---------|
+| `/config muterole role:@Muted` | Set mute role |
+| `/config notifications channel:#logs enabled:true` | Configure logging |
+| `/config audit enabled:true` | Enable audit system |
 
-#### "Webhook notifications failing"
-```
-✅ Verify webhook URL is valid
-✅ Check webhook permissions in target channel
-✅ Test webhook manually with curl
-✅ Enable webhook in config
-```
+#### Monitoring:
+| Command | Purpose |
+|---------|---------|
+| `/setup dashboard` | View network status |
+| `/audit log user:@user days:30` | User punishment history |
+| `/audit stats days:7` | Weekly statistics |
 
-### Error Codes
+### Permission Structure
 
-| Error | Meaning | Solution |
-|-------|---------|----------|
-| `403 Forbidden` | Missing permissions | Grant required roles |
-| `429 Rate Limited` | Too many requests | Wait and retry |
-| `404 Not Found` | User/guild not found | Verify IDs are correct |
-| `500 Internal Server Error` | Discord API issue | Retry later |
+#### Main Server Permissions:
+- **Administrators:** Full control - ban, unban, setup network, configure settings
+- **Moderators:** Can warn, mute, timeout, kick users
+- **Staff:** Can issue warnings only
 
-### Debug Mode
-
-Enable detailed logging:
-
-```python
-# In .env
-DEBUG=true
-
-# Restart bot, check bot.log for details
-tail -f bot.log
-```
-
-### Contact Support
-
-1. **Check Logs**: `tail -f bot.log` for error details
-2. **Run Diagnostics**: `/setup dashboard` for system status
-3. **Test Components**: `/setup test-connection` for connectivity
-4. **Export Data**: `/audit export` for investigation
+#### Child Server Permissions:
+- **Staff:** Can only punish locally (warnings/kicks only)
+- **Cannot spread punishments** (ZERO-LEAK security feature)
 
 ---
 
-## 🛡️ Backup & Disaster Recovery
+## 🔧 Troubleshooting Guide
 
-### Automated Backups
+### Bot Startup Issues
 
+#### "Python not recognized"
+**Solution:** Reinstall Python with "Add to PATH" checked (Windows) or use `python3` (Mac/Linux)
+
+#### "Improper token passed"
+**Cause:** Invalid BOT_TOKEN in `.env` file
+**Solution:**
+1. Go to Discord Developer Portal
+2. Regenerate token if needed
+3. Update `.env` file with correct token
+4. Restart bot
+
+#### "Discord login failure"
+**Possible Causes:**
+- Internet connectivity issues
+- Discord API service disruption (check discordstatus.com)
+- Expired bot token
+- Regional restrictions
+
+#### "Module 'discord' not found"
+**Solution:**
 ```bash
-# Create daily backup script (backup.sh)
-#!/bin/bash
-DATE=$(date +%Y%m%d_%H%M%S)
-cp bot.log bot_$DATE.log
-cp wayhaven_enforcer.db wayhaven_enforcer_$DATE.db
-echo "Backup created: $DATE"
+pip install -r requirements.txt
+# Or specifically:
+pip install discord.py==2.3.0 --force-reinstall
 ```
 
-### Database Maintenance
+### Permission Issues
 
-```sql
--- Regular maintenance commands
-VACUUM;                    -- Reclaim space
-REINDEX;                   -- Optimize indexes
-PRAGMA integrity_check;    -- Verify database health
+#### "Missing Permissions" Error
+**Checklist:**
+- Bot has correct permissions in server settings?
+- User running command has administrator privileges?
+- Discord Developer Portal permissions match server permissions?
+
+#### Commands Not Appearing
+**Troubleshooting Steps:**
+1. Verify bot is online and responsive
+2. Try typing `/` to refresh command list
+3. Confirm "Use Slash Commands" permission is enabled
+4. Restart bot (commands sync on startup)
+
+### Cross-Server Sync Problems
+
+#### Punishments Not Spreading
+**Common Causes:**
+- Target server not configured as child server (`/setup add-child`)
+- Bot not invited to child server
+- Child server administrator didn't grant bot permissions
+- ZERO-LEAK protection preventing unauthorized sync (this is intentional)
+
+#### "Child server blocked by security"
+**This is NORMAL behavior!**
+- Child servers cannot spread punishments (safety feature)
+- Only main server can spread to children
+- Prevents accidental network-wide punishments
+
+#### Bot Offline in Child Servers
+**Possible Issues:**
+- Bot not invited to that specific server
+- Server region blocking Discord services
+- Network connectivity problems
+
+### Database Issues
+
+#### "Database locked" Error
+**Immediate Solutions:**
+```bash
+# Stop bot first, then:
+cp wayhaven_enforcer.db backup.db  # Create backup
+python setup_database.py           # Recreate database
 ```
 
-### Recovery Procedures
+**Prevention:** Avoid opening database file in other programs while bot is running
 
 #### Database Corruption
+**Recovery Process:**
+1. Stop bot immediately
+2. Create backup: `cp wayhaven_enforcer.db backup_corrupt.db`
+3. Reset database: `rm wayhaven_enforcer.db && python setup_database.py`
+4. Restore missing data if possible
+
+#### Performance Optimization
 ```bash
-# Stop bot
-pkill -f "python bot.py"
+# Database maintenance
+sqlite3 wayhaven_enforcer.db "VACUUM;"        # Optimize database
+sqlite3 wayhaven_enforcer.db "PRAGMA integrity_check;"  # Verify integrity
+```
 
-# Restore from backup
-cp wayhaven_enforcer_backup.db wayhaven_enforcer.db
+### Advanced Troubleshooting
 
-# Reindex if needed
-sqlite3 wayhaven_enforcer.db "REINDEX;"
+#### Enable Debug Logging:
+```env
+# Add to .env file
+DEBUG=true
+```
+Restart bot for detailed console logging.
 
-# Restart bot
+#### Rate Limiting Issues:
+- Discord API limits: ~50 requests/second
+- Wayhaven handles this automatically
+- If issues persist, reduce sync frequency
+
+#### Memory Management:
+- Normal usage: 50-100MB RAM
+- Restart weekly if usage exceeds 200MB
+- Monitor with Task Manager (Windows) or Activity Monitor (Mac)
+
+---
+
+## 🏢 Enterprise Compliance & Legal Framework
+
+### GDPR Compliance Implementation
+
+**For organizations in Europe or handling European data:**
+
+#### Data Controller Responsibilities
+Wayhaven acts as a data processor on behalf of Discord server administrators (the data controllers).
+
+#### Lawful Processing Basis
+- **Legitimate Interest:** Operating moderation systems for community safety
+- **Legal Obligation:** Compliance with Discord's Terms of Service
+- **Consent:** Users consent by joining moderated servers
+
+#### Data Categories Processed
+```
+Stored Data:
+├── Personal Identifiers: Discord User IDs (pseudonymized)
+├── Event Data: Moderation actions, timestamps, reasons
+├── Communication: Warning messages (when sent)
+└── Metadata: Command usage patterns, server interaction logs
+```
+
+#### User Rights Implementation
+
+**Right to Information (Articles 13-14):**
+- Provide privacy notice explaining data processing
+- Transparently document data retention policies
+- Explain user rights for data subjects
+
+**Right to Access (Article 15):**
+```bash
+/audit log user:@username days:365
+```
+
+**Right to Rectification (Article 16):**
+- Server administrators can correct inaccurate data
+- Users can request corrections through appeal processes
+
+**Right to Erasure ("Right to be Forgotten") (Article 17):**
+```python
+async def delete_user_data(user_id: str):
+    await db.execute("DELETE FROM punishments WHERE target_user = ?", (user_id,))
+    await db.execute("DELETE FROM command_audit WHERE user_id = ?", (user_id,))
+    await db.log_compliance_event("user_data_erased", {"user_id": user_id})
+    return {"status": "erased", "user_id": user_id}
+```
+
+**Right to Data Portability (Article 20):**
+```bash
+/audit export days:365 user-filter:@username format:json
+```
+
+#### Data Retention Schedule
+
+| Data Type | Primary Retention | Extended Retention | Disposal Method |
+|-----------|-------------------|-------------------|-----------------|
+| Active Punishments | Until expired + 90 days | N/A | Automatic |
+| Audit Logs | 3 years | Up to 7 years if legal requirement | Secure deletion |
+| Command Logs | 6 months | 24 months for security investigations | Encrypted destruction |
+| System Logs | 3 months | 12 months for debugging | Compression then deletion |
+
+#### Data Protection Impact Assessment (DPIA)
+- Controllers must conduct DPIA before deployment
+- Technology assessment completed
+- Risk mitigation strategies documented
+- Data protection measures implemented
+
+---
+
+## 📞 Support & Contributing
+
+### Getting Help
+- Check the troubleshooting guide above
+- Review Discord Developer documentation
+- Verify bot permissions in Discord server settings
+
+### Reporting Issues
+- Include bot version and Python version
+- Provide error messages and console output
+- Describe steps to reproduce the issue
+- Note any recent configuration changes
+
+### Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+---
+
+**Wayhaven Enforcer Bot v2.1.0** - Professional Discord Moderation with ZERO-LEAK Security
+==================================================
+Creating database tables...
+✅ Created punishments table
+✅ Created guild_relationships table (ZERO-LEAK enabled)
+✅ Created command_audit table (100% compliance)
+✅ Created security_alerts table
+✅ Created system_health table
+✅ Database initialization complete!
+==================================================
+⚠️  IMMUTABLE SECURITY: Database locked for ZERO-LEAK protection
+🔒 Ready for bot startup
+```
+
+**Resource:** SQLite is used (no MySQL/PostgreSQL needed for small deployments)
+
+### Step 7: First Boot 🚀
+
+```bash
+# Start your bot for the first time:
 python bot.py
 ```
 
-#### Configuration Loss
-```bash
-# Recreate relationships
-/setup main-guild
-/setup add-child guild-id:SERVER_ID
+**What you should see:**
+```
+Starting Wayhaven Enforcer v2.1.0...
+==================================================
+Zero-Leak Security: ACTIVE
+Database: Connected
+Loading cogs...
+✅ Loaded punishments
+✅ Loaded sync
+✅ Loaded setup_cog
+✅ Loaded audit
+✅ Loaded reconciliation
+✅ Slash commands synced globally
+==================================================
+Wayhaven Enforcer is ready!
 
-# Restore settings
+Logged in as:
+Wayhaven Enforcer#1234
+Connected to 3 servers
+```
+
+#### If It Doesn't Start:
+
+**Token Invalid:**
+```
+discord.errors.LoginFailure: Improper token passed
+```
+- Check your `.env` file has the correct BOT_TOKEN
+- Make sure you copied the token correctly (including all characters)
+
+**Permission Issues:**
+```
+discord.errors.Forbidden: Missing Permissions
+```
+- Bot doesn't have the right permissions in some servers
+- Go back and reinvite with correct permissions
+
+**Database Issues:**
+```
+sqlite3.OperationalError: database is locked
+```
+- Close any other programs using the database
+- Run `python setup_database.py` again
+
+**Module Not Found:**
+```
+ModuleNotFoundError: No module named 'discord'
+```
+- Run `pip install -r requirements.txt` again
+
+#### Test Basic Functionality:
+1. In Discord, type `/` and look for Wayhaven commands
+2. Test a warning: `/warn user:@Yourself reason:Testing Wayhaven setup`
+3. Check if you received the warning message and if it logged
+
+### Step 8: Essential Server Configuration 🏫
+
+#### Create Required Roles:
+1. **Go to Server Settings → Roles**
+2. **Create "Muted" role:**
+   - Color: Orange/red
+   - Deny: Send Messages, Send Messages in Threads, Speak in voice
+   - Allow voice and text channel viewing
+
+#### Create Moderation Channels:
+1. **Create #moderation-logs:**
+   - Hide from regular members
+   - Used for punishment logging
+2. **Create #security-alerts:**
+   - Hide from everyone except admins
+   - Used for system security issues
+
+#### Link Wayhaven to Your Channels:
+```
 /config muterole role:@Muted
-/config webhook webhook-url:"https://..."
+/config notifications channel:#moderation-logs enabled:true
+/config logchannel channel:#security-alerts
 ```
 
-#### Multiple Server Failure
+#### Make Your Server a "Main Server":
+```
+/setup main-guild
+```
+
+**This designates your server as the "Principal's Office" - punishments here spread everywhere!**
+
+#### Connect Child Servers:
+```
+/setup add-child guild-id:123456789012345678
+```
+
+Repeat this for each server you want to connect. The child servers will receive punishments from the main server but cannot spread punishments themselves (ZERO-LEAK safety).
+
+---
+
+## Complete Command Reference 📋
+
+### Moderation Commands (The Main Tools):
+
+| Command | What It Does | Example | Who Can Use |
+|---------|--------------|---------|-------------|
+| `/ban user:@username reason:Kicked too many times` | Permanently removes user from all linked servers | `/ban user:@Spammer reason:Spam` | Admins, Moderators |
+| `/unban user:123456789 reason:Appeal approved` | Allows banned user back into all servers | `/unban user:987654321 reason:Mistake` | Admins only |
+| `/kick user:@username reason:Temporary removal` | Removes user from current server only | `/kick user:@Loud reason:Disruption` | Admins, Moderators |
+| `/mute user:@username duration:30m reason:Talking too much` | Prevents typing/speaking temporarily | `/mute user:@Chatter duration:1h` | Admins, Moderators |
+| `/timeout user:@username duration:2h reason:Argument` | Discord's built-in timeout system | `/timeout user:@Arguer duration:1d` | All moderators with permission |
+| `/warn user:@username reason:Reminder of rules` | Official warning to user (via DM) | `/warn user:@Newbie reason:Rule 1` | All staff |
+
+### Setup & Administration Commands:
+
+| Category | Commands | Purpose |
+|----------|----------|---------|
+| **Server Linking** | `/setup main-guild`<br>`/setup add-child guild-id:123`<br>`/setup remove-child guild-id:123` | Designate main server, connect/remove child servers |
+| **Server Status** | `/setup dashboard`<br>`/setup test-connection guild-id:123` | Check overall network health, test specific connections |
+| **Configuration** | `/config muterole role:@Muted`<br>`/config notifications channel:#logs enabled:true` | Set mute role, configure logging channels |
+| **Audit System** | `/audit log user:@user days:30`<br>`/audit stats days:7`<br>`/audit warnings user:@user` | Review user history, get statistics |
+
+### Permission Structure:
+
+**Main Server Admins**: Full control - can ban, unban, setup network
+**Main Server Moderators**: Can warn, mute, timeout, kick  
+**Child Server Staff**: Can only punish locally (warnings/kicks only)
+
+**ZERO-LEAK RULE**: Child servers CANNOT spread punishments to other servers - keeps things safe!
+
+---
+
+## Complete Troubleshooting Guide 🔧
+
+### "Bot Won't Start" Problems:
+
+#### Problem: "Python not recognized"
+**Fix:** Reinstall Python with "Add to PATH" checked (Windows) or use `python3` on Mac/Linux
+
+#### Problem: "Improper token passed"
+**Cause:** Invalid BOT_TOKEN in `.env` file
+**Fix:**
+1. Go to Discord Developer Portal
+2. Regenerate Token (click "Regenerate" if needed)
+3. Update `.env` file with new token
+4. Restart bot
+
+#### Problem: "Discord login failure"
+**Causes:**
+- Internet connection issues
+- Discord API down (check discordstatus.com)
+- Outdated bot token
+- Regional blocks (rare)
+
+#### Problem: "Module 'discord' not found"
+**Fix:**
 ```bash
-# Use reconciliation to sync everything
-/reconcile check
-/reconcile fix dry-run:false
-
-# Force full resync
-/audit log days:1  # Identify recent actions
-/forcesync user:@user  # Resync individual users
+pip install -r requirements.txt
+# Or reinstall discord.py specifically:
+pip install discord.py==2.3.0 --force-reinstall
 ```
 
-### High Availability Setup
+### Permission Issues:
 
+#### Problem: "Missing Permissions" error
+**Checks:**
+- Bot has correct permissions in server settings?
+- Are you an admin of the server?
+- Discord Developer Portal permissions match what we set up earlier?
+
+#### Problem: Commands don't appear in Discord
+**Fixes:**
+1. Bot online and responsive?
+2. Try `/` to trigger command list
+3. Bot has "Use Slash Commands" permission?
+4. Restart bot (some commands sync on startup)
+
+### Cross-Server Sync Problems:
+
+#### Problem: Punishments don't spread
+**Common Causes:**
+- Target server not set up as child server (`/setup add-child`)
+- Bot not invited to child server
+- Child server admin didn't give bot permissions
+- ZERO-LEAK protection preventing parent from spreading (this is intentional)
+
+#### Problem: "Child server blocked by security"
+**This is NORMAL ZERO-LEAK behavior!**
+- Child servers cannot spread punishments (safety feature)
+- Only main server can spread to children
+- This prevents accidental network-wide punishments
+
+#### Problem: Bot appears offline in child servers
+- Bot not invited to that specific server?
+- Server region blocking Discord?
+- Internet connectivity issues?
+
+### Database Issues:
+
+#### Problem: "Database locked" error
+**Immediate fixes:**
+```bash
+# Stop the bot first
+# Make a backup if worried:
+cp wayhaven_enforcer.db backup.db
+
+# Recreate empty database:
+python setup_database.py
+
+# Restart bot
 ```
-┌─────────────────┐    ┌─────────────────┐
-│   Primary Bot   │    │  Backup Bot     │
-│   (Active)      │    │  (Standby)      │
-└─────────────────┘    └─────────────────┘
-          │                       │
-          └─────── Shared ────────┘
-                  Database
-                      │
-               ┌─────────────────┐
-               │   File Backup   │
-               │   (Daily)       │
-               └─────────────────┘
+**Prevention:** Don't open database file in other programs while bot is running
+
+#### Problem: Database corruption
+**Recovery:**
+1. Stop bot immediately
+2. Backup current file: `cp wayhaven_enforcer.db backup_corrupt.db`
+3. Reset: `rm wayhaven_enforcer.db && python setup_database.py`
+4. Restore any missing data if possible
+
+#### Problem: Slow performance over time
+**Maintenance:**
+```bash
+# Vacuum database for better performance:
+sqlite3 wayhaven_enforcer.db "VACUUM;"
+
+# Check for corruption:
+sqlite3 wayhaven_enforcer.db "PRAGMA integrity_check;"
 ```
+
+### Advanced Issues:
+
+#### Enable Debug Logging:
+```env
+# Add to .env file
+DEBUG=true
+```
+
+Restart bot for detailed logging in console.
+
+#### Rate Limiting Issues:
+- Discord limits to ~50 requests/second
+- Wayhaven automatically handles this
+- If still hitting limits, reduce sync frequency or contact support
+
+#### Memory Leaks:
+- Bot uses ~50-100MB normally
+- Restart weekly if it climbs to 200MB+
+- Monitor with Task Manager/Activity Monitor
 
 ---
 
-## 🔌 API Reference (MCP Integration)
+## Enterprise Compliance & Legal Framework 🏢
 
-The bot can be integrated with external systems via Model Context Protocol (MCP).
+### GDPR Compliance Implementation
 
-### Server Registration
+**For organizations in Europe or handling European data:**
 
-```json
-{
-  "mcpServers": {
-    "wayhaven-enforcer": {
-      "command": "python",
-      "args": ["/path/to/bot.py", "--mcp"],
-      "env": {
-        "BOT_TOKEN": "token",
-        "DATABASE_URL": "sqlite:///db"
-      }
-    }
-  }
-}
+#### Data Controller Responsibilities
+Wayhaven acts as a data processor on behalf of Discord server administrators (the data controllers).
+
+#### Lawful Processing Basis
+- **Legitimate Interest:** Operating moderation systems for community safety
+- **Legal Obligation:** Compliance with Discord's Terms of Service
+- **Consent:** Users consent by joining moderated servers
+
+#### Data Categories Processed
+```
+Stored Data:
+├── Personal Identifiers: Discord User IDs (pseudonymized)
+├── Event Data: Moderation actions, timestamps, reasons
+├── Communication: Warning messages (when sent)
+└── Metadata: Command usage patterns, server interaction logs
 ```
 
-### Available MCP Tools
+#### User Rights Implementation
 
-#### `execute_moderation_action`
+**Right to Information (Articles 13-14):**
+- Provide privacy notice explaining data processing
+- Transparently document data retention policies
+- Explain user rights for data subjects
 
-Execute a moderation action across servers.
-
-**Parameters:**
-- `action`: "ban" | "kick" | "mute" | "warn"
-- `user_id`: Discord user ID (string)
-- `reason`: Reason for action (string)
-- `duration`: Duration for temporary actions (optional)
-- `guild_id`: Source guild ID (optional - uses main if not specified)
-
-**Returns:**
-```json
-{
-  "success": true,
-  "event_id": "12345",
-  "synced_guilds": ["guild1", "guild2"],
-  "errors": []
-}
+**Right to Access (Article 15):**
+```bash
+# Built-in data access command:
+/audit log user:@username days:365
 ```
 
-#### `query_audit_logs`
+**Right to Rectification (Article 16):**
+- Server administrators can correct inaccurate data
+- Users can request corrections through appeal processes
 
-Query audit logs with filtering.
+**Right to Erasure ("Right to be Forgotten") (Article 17):**
+```python
+# Automated deletion procedure:
+async def delete_user_data(user_id: str):
+    # Remove from all punishment tables
+    await db.execute("DELETE FROM punishments WHERE target_user = ?", (user_id,))
 
-**Parameters:**
-- `user_id`: Filter by user ID (optional)
-- `action`: Filter by action type (optional)
-- `guild_id`: Filter by guild ID (optional)
-- `days`: Days to look back (default: 30)
-- `limit`: Maximum results (default: 100)
+    # Remove audit history (after legal retention period)
+    await db.execute("DELETE FROM command_audit WHERE user_id = ?", (user_id,))
 
-**Returns:**
-```json
-{
-  "logs": [
-    {
-      "event_id": "12345",
-      "timestamp": "2025-01-20T10:30:00Z",
-      "user_id": "987654321",
-      "action": "ban",
-      "reason": "Rule violation",
-      "moderator_id": "111222333",
-      "guild_id": "123456789"
-    }
-  ],
-  "total": 1,
-  "filtered": false
-}
+    # Log deletion for compliance
+    await db.log_compliance_event("user_data_erased", {"user_id": user_id})
+
+    # Confirm deletion
+    return {"status": "erased", "user_id": user_id}
 ```
 
-#### `get_system_health`
-
-Get current system health status.
-
-**Parameters:**
-- `component`: Specific component to check (optional)
-
-**Returns:**
-```json
-{
-  "overall_status": "healthy",
-  "components": {
-    "database": {"status": "healthy", "last_check": "2025-01-20T10:30:00Z"},
-    "sync_engine": {"status": "healthy", "queue_size": 0},
-    "reconciliation": {"status": "healthy", "last_run": "2025-01-20T10:25:00Z"}
-  }
-}
+**Right to Data Portability (Article 20):**
+```bash
+# Export user data in standard format:
+/audit export days:365 user-filter:@username format:json
 ```
 
-#### `sync_user_punishments`
+**Right to Restriction (Article 18):**
+- Data processing can be restricted during complaint investigations
+- Automatic restraints during legal holds
 
-Force synchronization of a user's active punishments.
+**Right to Object/Automated Decision Making (Articles 21-22):**
+- Users can opt out of automated decision-making processes
+- Clear appeals processes for algorithmic decisions
 
-**Parameters:**
-- `user_id`: Discord user ID (required)
-- `guild_id`: Source guild ID (optional)
+#### Data Retention Schedule
 
-**Returns:**
-```json
-{
-  "success": true,
-  "user_id": "987654321",
-  "actions_synced": 2,
-  "target_guilds": ["guild1", "guild2"],
-  "errors": []
-}
-```
+| Data Type | Primary Retention | Extended Retention | Disposal Method |
+|-----------|-------------------|-------------------|-----------------|
+| Active Punishments | Until expired + 90 days | N/A | Automatic |
+| Audit Logs | 3 years | Up to 7 years if legal requirement | Secure deletion |
+| Command Logs | 6 months | 24 months for security investigations | Encrypted destruction |
+| System Logs | 3 months | 12 months for debugging | Compression then deletion |
 
----
+#### Data Protection Impact Assessment (DPIA)
 
-## ⚠️ Important Notes
-
-### Security Considerations
-- Always use HTTPS webhooks for production
-- Regularly rotate bot tokens
-- Limit `/config` commands to trusted administrators only
-- Monitor audit logs for unauthorized access
-- Use environment variables for sensitive configuration
-
-### Performance Guidelines
-- **Rate Limiting**: Sync delays prevent Discord API abuse
-- **Database Optimization**: Regular VACUUM operations recommended
-- **Monitoring**: Set up alerts for sync failures
-- **Backup Frequency**: Daily backups for critical deployments
-- **Resource Allocation**: Monitor memory usage in high-traffic servers
-
-### Compliance & Privacy
-- Audit logs contain user data - comply with local privacy laws
-- User punishment data is stored permanently unless manually deleted
-- Bot actions are attributed to moderators - maintain accountability
-- Cross-server data sharing requires user consent in some jurisdictions
-
-### Support Channels
-- **Documentation**: This README.md provides comprehensive guidance
-- **Logs**: Check `bot.log` for detailed error information
-- **Commands**: Use `/setup dashboard` for real-time diagnostics
-- **Community**: Join our Discord server for peer support
-
----
-
-## 📈 Future Roadmap
-
-### Planned Features v2.1+
-- **Advanced Analytics**: Punishment trends and user behavior analysis
-- **Custom Integration**: REST API for external moderation tools
-- **Multi-Platform Support**: Integration with other chat platforms
-- **Machine Learning**: Automated spam detection and user risk assessment
-- **Advanced Filtering**: Custom rules for automated moderation
-
-### Contributing
-We welcome contributions! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Add comprehensive tests
-4. Update documentation
-5. Submit a pull request
-
-### License
-This project is licensed under the MIT License. See LICENSE file for details.
-
----
-
-**🎉 Thank you for choosing Wayhaven Enforcer Bot v2.0!**
-
-*This README provides comprehensive guidance for setting up and operating your enterprise-grade Discord moderation bot. For additional support, please refer to the troubleshooting section or join our community Discord server.*
+**Required for high-risk processing:**
+- Controllers must conduct DPIA before deployment
+- Technologies assessment completed
+- Risk mitigation strategies documented
+- Data
