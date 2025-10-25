@@ -1,10 +1,21 @@
 # Wayhaven Enforcer Bot
 
+## Table of Contents
+- [Overview](#overview)
+- [How to Use](#how-to-use)
+- [Quick Start Guide](#quick-start-guide)
+- [Command Reference](#command-reference)
+- [Security Implementation](#security-implementation)
+- [System Requirements](#system-requirements)
+- [Discord Bot Setup](#discord-bot-setup)
+- [Installation & Configuration](#installation--configuration)
+- [Problem Resolution](#problem-resolution)
+- [Compliance & Legal](#compliance--legal)
+- [Maintenance & Support](#maintenance--support)
+
 ## Overview
 
 Wayhaven Enforcer is a comprehensive Discord moderation bot designed to provide cross-server punishment synchronization with integrated ZERO-LEAK security measures.
-
-## Features
 
 ### Core Functionality
 - **Cross-Server Moderation**: Synchronize punishments across multiple Discord servers automatically
@@ -19,196 +30,18 @@ The bot operates on a hierarchical security model:
 - **Child Servers (Execution Nodes)**: Connected servers that receive and apply punishments
 - **Immutable Relationships**: Once-way data flow prevents bidirectional command execution
 
----
+## How to Use
 
-## Prerequisites
+**Critical Setup Order**: For Wayhaven Enforcer to work perfectly and smoothly, you MUST set up your servers in this exact sequence:
 
-### System Requirements
-- **Python**: Version 3.8.0 or higher
-- **Operating System**: Windows 10/11, macOS 11+, or Linux distributions (Ubuntu 18.04+)
-- **Memory**: Minimum 2GB RAM recommended
-- **Storage**: 1GB free space for application and database
-- **Network**: Stable internet connection for Discord API communication
-
-### Discord Requirements
-- **Administrator Permissions**: Full control over target Discord servers
-- **Bot Account Creation**: Dedicated Discord application for bot hosting
-- **Server Management**: Ability to create roles, channels, and manage permissions
-
----
-
-## Installation and Setup
-
-### Step 1: Obtain Source Code
-
-Download the Wayhaven Enforcer source code from the repository and extract it to your desired installation directory:
-
-```bash
-# Navigate to installation directory
-cd /path/to/installation/directory/Wayhaven\ Punishment\ sync\ bot/
+### Step 1: Set Up Main Guild (Authority Hub) First
 ```
-
-### Step 2: Install Python Dependencies
-
-Install required Python libraries using pip:
-
-```bash
-# Install all required dependencies
-pip install -r requirements.txt
+Execute in your primary server: /setup main-guild
 ```
+**Why this comes first**: This designates your main server as the authority hub. Without this, no punishment synchronization can occur. The main guild becomes the "principal's office" that can broadcast punishments to connected servers.
 
-**Core Dependencies:**
-- `discord.py`: Discord API integration and bot functionality
-- `aiosqlite`: Asynchronous SQLite database operations
-- `python-dotenv`: Environment variable management
-- `sqlalchemy`: Database ORM and query operations
-
-### Step 3: Initialize Database
-
-Execute the database setup script to create required tables and security constraints:
-
-```bash
-# Initialize database schema and security settings
-python setup_database.py
-```
-
-**Expected Output:**
-```
-Wayhaven Enforcer Database Setup
-Creating database tables...
-✅ Created punishments table
-✅ Created guild_relationships table (ZERO-LEAK enabled)
-✅ Created command_audit table (100% compliance)
-✅ Created security_alerts table
-✅ Database initialization complete!
-⚠️ IMMUTABLE SECURITY: Database locked for ZERO-LEAK protection
-🔒 Ready for bot startup
-```
-
----
-
-## Discord Bot Configuration
-
-### Step 1: Create Discord Application
-
-1. Visit the [Discord Developer Portal](https://discord.com/developers/applications)
-2. Click **"New Application"**
-3. Enter **"Wayhaven Enforcer"** as the application name
-4. Accept the terms of service
-
-### Step 2: Create Bot User
-
-1. Navigate to the **"Bot"** section in the left sidebar
-2. Click **"Add Bot"**
-3. Agree to create the bot
-4. Optionally set an avatar and username for the bot
-
-### Step 3: Obtain Bot Credentials
-
-1. In the **"Bot"** section, locate **"Token"**
-2. Click **"Copy"** to obtain the bot token
-3. **Important**: Store this token securely - never share it publicly
-4. In **"General Information"**, note the **"Application ID"**
-
-### Step 4: Configure Bot Permissions
-
-In the **"Bot Permissions"** section, enable the following permissions:
-- Read Messages/View Channels
-- Send Messages
-- Use Slash Commands
-- Ban Members
-- Kick Members
-- Manage Roles
-- Moderate Members (timeout functionality)
-- View Audit Log
-- Read Message History
-
-**Generated Permission Integer**: `268561488`
-
-### Step 5: Generate Bot Invite Link
-
-1. Navigate to **"OAuth2" -> "URL Generator"**
-2. Select scopes: **"bot"** and **"applications.commands"**
-3. Select the previously configured bot permissions
-4. Copy the generated URL and use it to invite the bot to your servers
-
----
-
-## Configuration File Setup
-
-Create a `.env` file in the bot's root directory with the following content:
-
-```env
-# Discord Bot Authentication
-BOT_TOKEN=your_secret_bot_token_here
-APPLICATION_ID=123456789012345678
-CLIENT_ID=123456789012345678
-
-# Server Configuration
-MAIN_GUILD_ID=987654321098765432
-TEST_GUILD_ID=876543210987654321
-
-# Debugging and Logging
-DEBUG=false
-DATABASE_URL=sqlite+aiosqlite:///wayhaven_enforcer.db
-
-# Advanced Security Settings
-ZERO_LEAK_SECURITY_ENABLED=true
-AUDIT_LOG_RETENTION_DAYS=365
-AUTO_BACKUP_ENABLED=true
-```
-
-### Configuration Parameters
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `BOT_TOKEN` | Yes | Discord bot authentication token |
-| `APPLICATION_ID` | Yes | Discord application identifier |
-| `MAIN_GUILD_ID` | Yes | Server ID designated for main authority |
-| `TEST_GUILD_ID` | No | Server ID for testing features |
-| `DEBUG` | No | Enable detailed logging (default: false) |
-| `DATABASE_URL` | No | Custom database connection URL |
-| `ZERO_LEAK_SECURITY_ENABLED` | No | Enable advanced security (default: true) |
-
----
-
-## Server Configuration
-
-### Step 1: Role Configuration
-
-Create a designated "Muted" role with the following properties:
-
-**Role Settings:**
-- **Name**: Muted
-- **Color**: Orange (#FF6B35) or Red (#DC143C)
-- **Display Separately**: Enabled
-- **Permissions**:
-  - ✗ Send Messages
-  - ✗ Send Messages in Threads
-  - ✗ Create Public Threads
-  - ✗ Create Private Threads
-  - ✗ Speak in Voice Channels
-  - ✓ View Channels
-  - ✓ Read Message History
-
-### Step 2: Channel Configuration
-
-Create the following channels for operational functionality:
-
-**#moderation-logs**
-- **Purpose**: Display punishment actions and audit information
-- **Permissions**: Staff/Moderators only (deny @everyone)
-- **Recommended Settings**: Slow mode disabled, webhooks enabled
-
-**#security-alerts**
-- **Purpose**: System security notifications and alerts
-- **Permissions**: Administrators only
-- **Recommended Settings**: Read-only for non-admins, notifications enabled
-
-### Step 3: Bot Configuration Commands
-
-Execute the following commands to configure bot settings:
-
+### Step 2: Configure Main Guild Settings
+After setting up the main guild, configure essential settings:
 ```
 /config muterole role:@Muted
 /config notifications channel:#moderation-logs enabled:true
@@ -216,55 +49,401 @@ Execute the following commands to configure bot settings:
 /config audit enabled:true
 ```
 
----
-
-## Network Architecture Setup
-
-### Establishing Main Server Authority
-
-Designate the primary server as the authority hub:
-
-```
-/setup main-guild
-```
-
-**Functionality Granted:**
-- Cross-server punishment broadcasting capabilities
-- Network relationship management
-- Central audit logging authority
-- Child server connection management
-
-### Connecting Child Servers
-
-Connect additional servers to receive punishment synchronization:
-
+### Step 3: Connect Child Guilds (Execution Nodes)
+After main guild is fully configured, connect additional servers:
 ```
 /setup add-child guild-id:123456789012345678
 ```
+**Important**: Replace `guild-id` with the actual 18-digit Discord server ID of each child server.
 
-**Parameters:**
-- `guild-id`: Discord server ID to connect (18-digit number)
-
-**Resulting Functionality:**
-- Automatic punishment reception
-- Local moderation capabilities preserved
-- Centralized rule compliance
-
-### Network Management
-
-Monitor and manage the interconnected server network:
-
+### Step 4: Verify Network Synchronization
+Check that everything is connected properly:
 ```
 /setup dashboard
 ```
+This command shows your server network status and confirms synchronization is working.
 
-Displays current network status including:
-- Connected server count
-- Active relationship status
-- Synchronization health
-- Security compliance status
+### Step 5: Test Punishment Synchronization
+Test that punishments spread correctly:
+- Issue a mute command in the main guild
+- Verify it automatically applies to connected child servers
+- Check audit logs to confirm proper synchronization
+
+### Essential Setup Rules for Perfect Operation
+1. **Main guild setup must complete first** - No synchronization works without it
+2. **Bot must be invited to ALL servers** - Missing bot invitation = failed sync
+3. **Matching mute role names** - Ensure all servers have the configured mute role
+4. **Proper permissions** - Bot needs specific Discord permissions in each server
+5. **Network test before use** - Always verify with `/setup dashboard` before relying on sync
+
+**Troubleshooting Note**: If punishments aren't syncing, 90% of the time it's because the main guild wasn't set up first, or child guilds weren't properly connected. Re-check the setup sequence above.
 
 ---
+
+## Quick Start Guide
+
+### Prerequisites Checklist
+- [ ] Python 3.8+ installed on your system
+- [ ] Discord account with administrator permissions
+- [ ] All target Discord servers where you have admin control
+- [ ] Basic understanding of Discord server management
+
+### Step 1: Get Bot Token
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Create a new application
+3. Go to "Bot" section and create a bot user
+4. Copy the bot token and keep it secure
+
+### Step 2: Bot Permissions Setup
+In Discord Developer Portal, enable these permissions:
+- Ban Members, Kick Members, Manage Roles
+- Send Messages, Use Slash Commands
+- View Audit Log, Moderate Members
+
+### Step 3: Invite Bot to Servers
+1. Generate invite link using OAuth2 URL Generator
+2. Select scopes: `bot` and `applications.commands`
+3. Select the permissions from Step 2
+4. Use the generated URL to invite the bot to ALL your servers
+
+### Step 4: Create Required Discord Roles & Channels
+In each server, create:
+- **Muted role** (permissions: deny Send Messages, allow View Channels)
+- **#moderation-logs** channel (staff only)
+- **#security-alerts** channel (admin only)
+
+### Step 5: Install & Configure Wayhaven Enforcer
+```bash
+# Download and extract bot files
+cd "Wayhaven Punishment sync bot"
+
+# Install dependencies and setup
+pip install -r requirements.txt
+python setup_database.py
+
+# Create .env file with your bot token
+echo "BOT_TOKEN=your_bot_token_here" > .env
+echo "MAIN_GUILD_ID=your_main_server_id" >> .env
+```
+
+### Step 6: Launch Bot
+```bash
+python bot.py
+```
+
+### Step 7: Initial Bot Configuration
+```
+/setup main-guild
+/config muterole role:@Muted
+/config notifications channel:#moderation-logs enabled:true
+```
+
+### Step 8: Connect Additional Servers
+```
+/setup add-child guild-id:123456789012345678
+/setup dashboard
+```
+
+For a complete technical guide, see: [System Requirements](#system-requirements) | [Discord Bot Setup](#discord-bot-setup) | [Installation & Configuration](#installation--configuration)
+
+---
+
+## System Requirements
+
+### Hardware Requirements
+- **CPU**: 1 GHz or faster processor
+- **RAM**: 2GB minimum, 4GB recommended
+- **Storage**: 1GB free space for application and database
+- **Network**: Stable internet connection (10 Mbps minimum)
+
+### Software Requirements
+- **Operating System**:
+  - Windows 10 version 20H2 or later
+  - Windows 11 (all versions)
+  - macOS 11.0 (Big Sur) or later
+  - Linux distributions (Ubuntu 18.04+, CentOS 8+, etc.)
+- **Python Runtime**: Version 3.8.0 or higher (3.11+ recommended)
+
+### Discord Requirements
+- **Bot Account**: Dedicated Discord application for the bot
+- **Server Permissions**: Administrator privileges in target servers
+- **Bot Permissions**: Specific permissions for moderation functionality
+- **Channel Access**: Ability to create and manage text channels
+
+---
+
+## Discord Bot Setup
+
+### Creating Discord Application
+
+1. **Access Developer Portal**
+   - Navigate to https://discord.com/developers/applications
+   - Sign in with your Discord account
+
+2. **Create New Application**
+   - Click "New Application" button
+   - Enter "Wayhaven Enforcer" as application name
+   - Agree to Discord's Terms of Service
+
+3. **Generate Bot User**
+   - Select "Bot" section from left sidebar
+   - Click "Add Bot" to create bot user
+   - Optionally configure avatar and username
+   - **Important**: Keep bot token secure and private
+
+### Bot Permissions Configuration
+
+Configure the following permissions in the "Bot Permissions" section:
+
+**Required Permissions:**
+- ✗ View Channels (view channels and read message history)
+- ✗ Send Messages (send messages and create public threads)
+- ✗ Use Slash Commands (use application commands)
+- ✗ Ban Members (ban members from this server)
+- ✗ Kick Members (kick members from this server)
+- ✗ Manage Roles (manage roles below the bot's highest role)
+- ✗ Moderate Members (timeout members)
+- ✗ View Audit Log (view server's audit log)
+
+**Calculated Permission Integer:** 268561488
+
+### Bot Invite Link Generation
+
+1. **Navigate to OAuth2 Settings**
+   - Select "OAuth2" section
+   - Choose "URL Generator" subsection
+
+2. **Configure Invite Parameters**
+   - **Scopes**: Select `bot` and `applications.commands`
+   - **Permissions**: Choose the permissions configured above
+
+3. **Generate and Use Invite Link**
+   - Copy the generated URL
+   - Open in browser and select target Discord servers
+   - Complete authorization for bot joining
+
+---
+
+## Installation & Configuration
+
+### Technical Installation Steps
+
+#### Step 1: Obtain Source Code
+1. Download the Wayhaven Enforcer source code package
+2. Extract the contents to your chosen installation directory
+3. Ensure all files are preserved with proper permissions
+
+#### Step 2: Environment Preparation
+Verify your system meets the specified requirements:
+- Python 3.8.0 or higher must be available in PATH
+- Pip package manager must be functional
+- Write permissions in the installation directory
+
+#### Step 3: Dependency Installation
+Execute the following commands in sequence:
+
+```bash
+# Navigate to bot directory
+cd "Wayhaven Punishment sync bot"
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Verify installation success
+python -c "import discord, aiosqlite, dotenv; print('All dependencies installed successfully')"
+```
+
+#### Step 4: Database Initialization
+Initialize the application's database schema:
+
+```bash
+# Execute database setup script
+python setup_database.py
+```
+
+**Expected initialization output:**
+- Schema creation confirmation
+- Table generation progress
+- Security constraints establishment
+- Completion verification
+
+### Environment Configuration Setup
+
+Create a `.env` configuration file in the root directory:
+
+```env
+# Discord Bot Authentication
+BOT_TOKEN=your_secret_bot_token_here
+APPLICATION_ID=123456789012345678
+
+# Server Configuration
+MAIN_GUILD_ID=987654321098765432
+TEST_GUILD_ID=876543210987654321
+
+# Operational Settings
+DEBUG=false
+DATABASE_URL=sqlite+aiosqlite:///wayhaven_enforcer.db
+
+# Security Configuration
+ZERO_LEAK_SECURITY_ENABLED=true
+AUDIT_LOG_RETENTION_DAYS=365
+AUTO_BACKUP_ENABLED=true
+```
+
+### Configuration Parameter Reference
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `BOT_TOKEN` | string | Yes | N/A | Discord bot authentication token |
+| `APPLICATION_ID` | string | Yes | N/A | Discord application identifier |
+| `MAIN_GUILD_ID` | string | Yes | N/A | Primary server ID for authority hub |
+| `TEST_GUILD_ID` | string | No | N/A | Testing server ID (optional) |
+| `DEBUG` | boolean | No | false | Enable detailed logging output |
+| `DATABASE_URL` | string | No | sqlite file | Database connection URL |
+| `ZERO_LEAK_SECURITY_ENABLED` | boolean | No | true | Activate ZERO-LEAK protection |
+| `AUDIT_LOG_RETENTION_DAYS` | integer | No | 365 | Log retention period |
+| `AUTO_BACKUP_ENABLED` | boolean | No | true | Enable automatic database backups |
+
+### Server Preparation Configuration
+
+#### Role Setup Requirements
+Create the "Muted" role with precise permissions:
+
+**Essential Role Properties:**
+- **Name**: "Muted" (case-sensitive)
+- **Color**: Orange (#FF6B35) or Red (#DC143C)
+- **Position**: Below moderator roles but above members
+- **Display Settings**: "Display role members separately from online members"
+
+**Critical Permission Configuration:**
+- ❌ Send Messages
+- ❌ Send Messages in Threads
+- ❌ Create Public Threads
+- ❌ Create Private Threads
+- ❌ Speak in Voice Channels
+- ❌ Use Voice Activity
+- ✅ View Channels
+- ✅ Read Message History
+
+#### Channel Configuration
+Establish the following communication channels:
+
+**#moderation-logs**
+- **Access Control**: Limited to staff and moderators
+- **Webhook Integration**: Enabled for automated posting
+- **Rate Limiting**: Disabled for real-time notifications
+- **Position**: Early in channel list for visibility
+
+**#security-alerts**
+- **Access Control**: Restricted to administrators
+- **Audit Integration**: Connected to security monitoring systems
+- **Notification Settings**: Critical system alerts enabled
+- **Archive Policy**: Long-term security log retention
+
+### Initial Bot Commands Execution
+
+Execute configuration commands in the specified sequence:
+
+```bash
+# Set mute role for punishment enforcement
+/config muterole role:@Muted
+
+# Configure logging channels
+/config notifications channel:#moderation-logs enabled:true
+/config logchannel channel:#security-alerts
+
+# Enable audit functionality
+/config audit enabled:true
+
+# Set main server authority (execute first)
+ /setup main-guild
+
+# Connect child servers (replace with actual IDs)
+ /setup add-child guild-id:123456789012345678
+
+# Verify network configuration
+ /setup dashboard
+```
+
+### Verification and Testing
+
+#### Startup Validation
+Execute the bot and monitor for successful initialization:
+
+```bash
+# Launch the application
+python bot.py
+```
+
+**Success Indicators:**
+- Database connection established
+- Discord API authentication successful
+- Command synchronization completed
+- Background services initialized
+- Network connectivity confirmed
+
+#### Functionality Testing
+
+Validate core functionality through systematic testing:
+
+1. **Authentication Test**: Verify bot responds to `/help`
+2. **Configuration Test**: Confirm `/config` commands execute
+3. **Network Test**: Validate `/setup dashboard` displays correctly
+4. **Punishment Test**: Execute test `/mute` command with verification
+5. **Audit Test**: Confirm logging appears in designated channels
+
+### Post-Installation Optimization
+
+#### Performance Tuning
+- Configure appropriate logging levels for production
+- Set up database backup schedules
+- Implement monitoring solutions
+- Establish maintenance routines
+
+#### Security Hardening
+- Rotate bot tokens regularly
+- Restrict .env file permissions
+- Implement backup recovery procedures
+- Configure security alert monitoring
+
+### Troubleshooting New Installations
+
+#### Common Installation Issues
+
+**Module Installation Failures:**
+```bash
+# Force reinstallation of problematic packages
+pip uninstall -y discord.py aiosqlite python-dotenv
+pip cache purge
+pip install --no-cache-dir -r requirements.txt
+```
+
+**Database Initialization Problems:**
+```bash
+# Clean restart of database
+rm wayhaven_enforcer.db
+python setup_database.py
+```
+
+**Permission Configuration Issues:**
+- Verify bot roles are positioned correctly
+- Confirm role permissions match specifications
+- Check channel permissions for posting access
+- Validate bot token validity and scope
+
+See [Problem Resolution](#problem-resolution) for comprehensive troubleshooting guidance.
+
+---
+
+## Problem Resolution
+
+---
+
+## Compliance & Legal
+
+---
+
+## Maintenance & Support
 
 ---
 
